@@ -20,15 +20,12 @@ public class FileParam {
 		this.inputStream = inputStream;
 		this.fieldName = fieldName;
 	}
-
 	public String getFieldName() {
 		return fieldName;
 	}
-
 	public void setFieldName(String fieldName) {
 		this.fieldName = fieldName;
 	}
-
 	public String getFileName() {
 		return fileName;
 	}
