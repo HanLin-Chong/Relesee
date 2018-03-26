@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		          <h1 class="site-title l-site-title" style="font-size:1.2em;">文件上传</h1>
 		      </header>
 		      <div class="uploader__box js-uploader__box l-center-box">
-		          <form action="#" method="POST"  >
+		          <form action="#" method="POST">
 		              <div class="uploader__contents">
 		                  <label class="button button--secondary" for="fileinput">请将文件拖曳至此上传</label>
 		                  <input id="fileinput" class="uploader__file-input" type="file" multiple value="Select Files">
