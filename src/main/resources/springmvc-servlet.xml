@@ -20,4 +20,10 @@
 	   		<property name="prefix" value="/jsp/"></property>
 	   		<property name="suffix" value=".jsp"></property>
 	   </bean>
+	   <!-- 配置MultipartResolve用于文件的上传 -->
+	   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	 	    <property name="defaultEncoding" value="UTF-8"></property>
+	   		<property name="maxUploadSize" value="540000"></property>
+	   		<property name="uploadTempDir" value="uploadfiles"></property>
+	   	</bean>
 </beans>

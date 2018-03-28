@@ -14,7 +14,7 @@
                 dropZone: $(this),
                 fileTypeWhiteList: ['jpg', 'png', 'jpeg', 'gif', 'pdf'],
                 badFileTypeMessage: 'Sorry, we\'re unable to accept this type of file.',
-                ajaxUrl: '/uploadsinglefile',
+                ajaxUrl: '/relesee/uploadsinglefile',
                 testMode: false
             }, options);
 

@@ -17,6 +17,4 @@ public class FileDomain {
 	public void setFile(MultipartFile file) {
 		this.file = file;
 	}
-	
-	
 }
