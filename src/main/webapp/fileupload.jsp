@@ -5,7 +5,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html lang="zh">
   <head>
     <base href="<%=basePath%>">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-	<form name="single_file" method="post" action="uploadsinglefile" enctype="multipart/form-data">
+	<form method="post" action="upload/ajax/singlefile" enctype="multipart/form-data">
   		<input type="file" name="file"><br>
   		文件描述<input type="text" name="description"><br>
   		<input type="submit" value="提交">
