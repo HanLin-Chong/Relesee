@@ -2,22 +2,23 @@ package interceptor;
 
 import java.io.PrintWriter;
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
 import annotation.Auth;
-
 /**
  * 
  * @author JinFeng
  * 实现用户权限控制的拦截器
  */
 public class AuthInterceptor extends HandlerInterceptorAdapter{
+	
+	 private Log logger = LogFactory.getLog(AuthInterceptor.class);
 	 public static final String SESSION_USERID = "user_id";
 	 public static final String SESSION_AUTH = "user_auth";
 	 /*
@@ -30,6 +31,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	 @Override
 	 public boolean preHandle(HttpServletRequest request,HttpServletResponse response,Object handler) throws Exception{
 		 boolean flag = true;
+		 logger.info("拦截器启动拦截");
+		 System.out.println("拦截器启动拦截");
 		 if(handler instanceof HandlerMethod){
 			 Auth auth = ((HandlerMethod) handler).getMethod().getAnnotation(Auth.class);
 			if(auth!=null){
