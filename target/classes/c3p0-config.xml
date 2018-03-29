@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>  
-<c3p0-config>    
+<c3p0-config>  
+	<!-- 数据库连接池的基本配置信息，可以配置多个，多种数据库的相关信息 -->
     <!-- This is default config! -->    
     <default-config>    
         <property name="initialPoolSize">10</property>    
