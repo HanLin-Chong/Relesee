@@ -31,6 +31,10 @@
   		 <servlet-name >default </servlet-name >               
    		<url-pattern >*.css</url-pattern>          
 	</servlet-mapping> 
+	<servlet-mapping >  
+  		 <servlet-name >default </servlet-name >               
+   		<url-pattern >*.html</url-pattern>          
+	</servlet-mapping> 
 	<!-- 配置springmvc的基本配置 -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
@@ -38,7 +42,7 @@
 		<init-param>
 		<!-- 配置springmvc中config的基本路径 -->
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/lib/springmvc-servlet.xml</param-value>
+			<param-value>classpath:springmvc-servlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
