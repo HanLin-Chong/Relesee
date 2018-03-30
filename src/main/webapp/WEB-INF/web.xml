@@ -49,7 +49,7 @@
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<!-- 使用这个类处理所有的url -->
-		<url-pattern>/</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	<filter>
         <filter-name>characterEncodingFilter</filter-name>
