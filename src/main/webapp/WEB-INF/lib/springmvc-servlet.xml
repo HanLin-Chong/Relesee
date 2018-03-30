@@ -10,12 +10,14 @@
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
-				http://www.springframework.org/schema/context 
+	    http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context.xsd">
 	<mvc:interceptors>
 	 	<mvc:interceptor>
 	 		<!-- 标识要拦截的路径 -->
-	 	   <mvc:mapping path="/*" />
+	 	   <mvc:mapping path="/**" />
+	 	   <mvc:mapping path="/**.jsp"/>
+	 	    <mvc:mapping path="/**/*.jsp"/>
             <!-- 处理拦截的具体实现类 -->
             <bean class="interceptor.AuthInterceptor"> 
             <!-- 一下表示的是不要拦截的路径 -->
@@ -23,6 +25,7 @@
 	 	</mvc:interceptor>	
 	 </mvc:interceptors>
 		<!-- 配置spring的扫描机制-->
+	   <mvc:annotation-driven />  
 	   <context:component-scan base-package="controller"></context:component-scan>
 	   <context:component-scan base-package="services"/>
 	   
@@ -37,4 +40,17 @@
 	   		<property name="maxUploadSize" value="540000"></property>
 	   		<property name="uploadTempDir" value="uploadfiles"></property>
 	   	</bean>
+	   	
+	   	 <context:property-placeholder location="classpath:jdbc.properties"/> 
+	 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	 	<property name="user" value="${username}"></property>
+	 	<property name="password" value="${password}"></property>
+	 	<property name="initialPoolSize" value="${initPoolSize}"></property>
+	 	<property name="driverClass" value="${driverClass}"></property>
+	 	<property name="maxPoolSize" value="${maxPoolSize}"></property>
+	 <!-- 配置spring 的JdbcTemplate -->
+	 </bean>
+	 <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	 </bean>
 </beans>
