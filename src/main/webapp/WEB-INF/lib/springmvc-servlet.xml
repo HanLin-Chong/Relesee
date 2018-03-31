@@ -53,4 +53,16 @@
 	 <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource"></property>
 	 </bean>
+	 
+	   <!-- 为Controller中的ModelAndView中的路径添加前缀和后缀名  在Controller只需要写名字就可以
+	   	viewresolver 师视图解析器
+	    -->
+	   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="internalResource">
+	   		<!-- <property name="prefix" value="/jsp/"></property>-->
+	   		<property name="suffix" value=".jsp"></property>
+	   </bean>
+	   <!-- 该 BeanPostProcessor 将自动对标注@Autowired 的 Bean 进行注入 -->    
+
+  <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> 
+	<bean class="services.LoginServiceImpl" id="userService"></bean>
 </beans>

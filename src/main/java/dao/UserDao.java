@@ -2,6 +2,8 @@ package dao;
 
 import java.util.Map;
 
+import domain.User;
+
 public interface UserDao {
-	public Map<String, Object> findById(String userid);
+	public User findById(String userid);
 }

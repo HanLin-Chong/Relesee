@@ -1,34 +1,40 @@
 package dao.daoImpl;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-
-import dao.BaseDao;
+import org.springframework.stereotype.Repository;
 import dao.UserDao;
 import domain.User;
+/**
+ * 
+ * @author JinFeng
+ *  UserDaoImpl 继承BaseDao
+ */
+@Repository("userDao")
+public class UserDaoImpl implements UserDao{
 
-public class UserDaoImpl extends BaseDao implements UserDao{
-
-	public User findUserById(String userid){
+	@Autowired 
+	private JdbcTemplate jdbcTemplate;
+	/*
+	 *  TODO
+	 *  在这里原本不用增加 这个方法的，在BaseDao中使用@Aurowired  注入了JdbcTemplate  
+	 *  但是没有实现其相关效果，在这里先使用这个方法代替
+	 */
+	public void setJdbcTemplate(JdbcTemplate jdbcTemlate){
+		this.jdbcTemplate = jdbcTemlate;
+	}
+	public User findById(String userid){
 		String sql = "select * from users where userid =?";
 		User user=null;
 		RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);  
-		user = jdbcTemplate.queryForObject(sql, rowMapper,1);
+		try{
+			user = jdbcTemplate.queryForObject(sql, rowMapper,userid);
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
 		return user;
-	}
-	@Override
-	public Map<String ,Object> findById(String userid) {
-		String sql = "select * from users where userid =?";
-		Object obj[] = {userid};
-		return findByParam(sql, obj).get(0);
-		
-	}
-	@Override
-	public String toString(){
-		 return null;
 	}
 }

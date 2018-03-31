@@ -1,10 +1,16 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh">
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+  <base href="<%=basePath%>">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>登录</title>
+	<title></title>
 	
 	<style type="text/css">
 		.login-page {
@@ -95,7 +101,7 @@
 		.container .info span .fa {
 		  color: #EF3B3A;
 		}
-		body {/*背景配色*/
+		body {/*èæ¯éè²*/
 		  background: #76b852; /*#76b852 fallback for old browsers */
 		  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
 		  background: -moz-linear-gradient(right, #76b852, #8DC26F);
@@ -155,26 +161,24 @@
 <body>
 	<div class="htmleaf-container">
 		
-		<!--<p class="center">登录用户名为：www.htmleaf.com，密码为www.htmleaf.com</p>
-		<p class="center">在用户名和密码错误时，点击登录按钮可以看到表单的摇晃效果。</p>-->
+		<!--<p class="center">ç»å½ç¨æ·åä¸ºï¼www.htmleaf.comï¼å¯ç ä¸ºwww.htmleaf.com</p>
+		<p class="center">å¨ç¨æ·ååå¯ç éè¯¯æ¶ï¼ç¹å»ç»å½æé®å¯ä»¥çå°è¡¨åçææææã</p>-->
 		<div id="wrapper" class="login-page">
 		  <div id="login_form" class="form">
 		  	<!--
 		    <form class="register-form">
-		      <input type="text" placeholder="用户名" id="r_user_name"/>
-		      <input type="password" placeholder="密码" id="r_password" />
-		      <input type="text" placeholder="电子邮件" id="r_emial"/>
-		      <button id="create">创建账户</button>
-		      <p class="message">已经有了一个账户? <a href="#">立刻登录</a></p>
+		      <input type="text" placeholder="ç¨æ·å" id="r_user_name"/>
+		      <input type="password" placeholder="å¯ç " id="r_password" />
+		      <input type="text" placeholder="çµå­é®ä»¶" id="r_emial"/>
+		      <button id="create">åå»ºè´¦æ·</button>
+		      <p class="message">å·²ç»æäºä¸ä¸ªè´¦æ·? <a href="#">ç«å»ç»å½</a></p>
 		    </form>
 		    -->
-		    <form class="login-form">
-		      <input type="text" placeholder="用户名" id="user_name"/>
-		      <input type="password" placeholder="密码" id="password"/>
-		      <button id="login">登　录</button>
-		      <p class="message">忘记密码? <a href="#" target="_blank">找回密码</a></p>
-		      
-		      、	  <!-- 直接打开一个新窗口，用于找回密码  -->
+		    <form class="login-form" method="post" action="user/login">
+		      <input type="text" placeholder="账号" name="userid" id="username"/>
+		      <input type="password" placeholder="密码" name="password" id="password"/>
+		      <button id="login" onClick="check_login()">登录</button>
+		      <p class="message"> <a href="#" target="_blank"></a></p>
 		    </form>
 		  </div>
 		</div>
@@ -191,19 +195,18 @@
 	{
 	 var name=$("#user_name").val();
 	 var pass=$("#password").val();
-	 /*
+	 
 	 $.ajax({
-	 	url:"",
-	 	data:{},
+	 	url:"user/login",
+	 	data:{username:name,password:password},
 	 	async:false,method:"post",
 	 	success:function(data){
 	 	
 	 	}
 	 });
-	 */
-	 if(name=="test" && pass=="test")//这里改成从后台传来的boolean值
+	 if(name=="test" && pass=="test")//è¿éæ¹æä»åå°ä¼ æ¥çbooleanå¼
 	 {
-	  //alert("登录成功！");
+	  //alert("ç»å½æåï¼");
 	  $("#user_name").val("");
 	  $("#password").val("");
 
@@ -223,7 +226,7 @@
 		var email = $("r_email").val();
 		if(name!="" && pass=="" && email != "")
 		 {
-		  alert("注册成功！");
+		  alert("æ³¨åæåï¼");
 		  $("#user_name").val("");
 		  $("#password").val("");
 		 }

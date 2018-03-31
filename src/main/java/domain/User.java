@@ -6,56 +6,60 @@ import java.io.Serializable;
  * 用户表
  */
 public class User implements Serializable{
-	private String userName;
+	private String username="";
 	
-	private String userId;
+	private String userid="";
 	
-	private String deptId;
+	private String deptid="";
 	
-	private String password;
+	private String password="";
 	
-	private int userAuth;
+	private int userauth=0;
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
-	public String getDeptId() {
-		return deptId;
+	public String getDeptid() {
+		return deptid;
 	}
 
 	public void setDeptid(String deptid) {
-		this.deptId = deptid;
+		this.deptid = deptid;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String passsword) {
-		this.password = passsword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public int getUserAuth() {
-		return userAuth;
+	public int getUserauth() {
+		return userauth;
 	}
 
-	public void setUserAuth(int userAuth) {
-		this.userAuth = userAuth;
+	public void setUserauth(int userauth) {
+		this.userauth = userauth;
 	}
-	
+
+	@Override
+	public String toString(){
+		return "Username:"+username+"password:"+password+"userid"+userid;
+	}
 	
 }
 

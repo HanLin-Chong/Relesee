@@ -17,6 +17,7 @@ import annotation.Auth;
  * 
  * @author JinFeng
  * 实现用户权限控制的拦截器
+ * 拦截器只对action请求做出相应
  */
 public class AuthInterceptor  implements HandlerInterceptor{
 	
@@ -38,7 +39,7 @@ public class AuthInterceptor  implements HandlerInterceptor{
 			 Auth auth = ((HandlerMethod) handler).getMethod().getAnnotation(Auth.class);
 			if(auth!=null){
 				if(request.getSession().getAttribute(SESSION_USERID) == null){
-					response.setStatus(HttpStatus.FORBIDDEN.value());
+				
 					
 				}
 			} else {// 登录了检查,方法上只是@Auth,表示只要求登录就能通过.@Auth("authority")这类型,验证用户权限  
