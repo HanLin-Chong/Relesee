@@ -9,14 +9,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import annotation.Auth;
 /**
  * 
  * @author JinFeng
  * 实现用户权限控制的拦截器
+ * 拦截器只对action请求做出相应
  */
-public class AuthInterceptor extends HandlerInterceptorAdapter{
+public class AuthInterceptor  implements HandlerInterceptor{
 	
 	 private Log logger = LogFactory.getLog(AuthInterceptor.class);
 	 public static final String SESSION_USERID = "user_id";
@@ -30,14 +33,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	  */
 	 @Override
 	 public boolean preHandle(HttpServletRequest request,HttpServletResponse response,Object handler) throws Exception{
-		 boolean flag = true;
-		 logger.info("拦截器启动拦截");
 		 System.out.println("拦截器启动拦截");
+		 boolean flag = true;
 		 if(handler instanceof HandlerMethod){
 			 Auth auth = ((HandlerMethod) handler).getMethod().getAnnotation(Auth.class);
 			if(auth!=null){
 				if(request.getSession().getAttribute(SESSION_USERID) == null){
-					response.setStatus(HttpStatus.FORBIDDEN.value());
+				
 					
 				}
 			} else {// 登录了检查,方法上只是@Auth,表示只要求登录就能通过.@Auth("authority")这类型,验证用户权限  
@@ -57,4 +59,17 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		 }
 		 return flag;
 	 }
+		@Override
+		public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
+				throws Exception {
+			System.out.println("This is postHandle");
+			
+		}
+		@Override
+		public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
+				Exception ex) throws Exception {
+			// TODO Auto-generated method stub
+			
+		}
+	 
 }
