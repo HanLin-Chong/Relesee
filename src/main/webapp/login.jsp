@@ -175,17 +175,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </form>
 		    -->
 		    <form class="login-form" method="post" action="user/login">
-		      <input type="text" placeholder="账号" name="userid" id="username"/>
-		      <input type="password" placeholder="密码" name="password" id="password"/>
-		      <button id="login" onClick="check_login()">登录</button>
+		      <input type="text" placeholder="账号" name="userid"/>
+		      <input type="password" placeholder="密码" name="password" />
+		      <button id="login" type="submit">登录</button>
 		      <p class="message"> <a href="#" target="_blank"></a></p>
 		    </form>
 		  </div>
 		</div>
-
-		
 	</div>
-	
 	<script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
 	<!--   
 		<script>window.jQuery || document.write('<script src="js/jquery-2.1.1.min.js"><\/script>')</script>

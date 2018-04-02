@@ -25,9 +25,9 @@ public class LoginController {
 			System.out.println("登陆成功");
 			HttpSession session = req.getSession();
 			session.setAttribute("user", loginService.getUser(user));
-			return new ModelAndView("redirect:/index.jsp");
 		}else{
-		       return new ModelAndView("/index.jsp");
+		       return new ModelAndView("/login.jsp");
 		}
+		return new ModelAndView("/index.jsp");
 	}
 }

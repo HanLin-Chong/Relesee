@@ -32,7 +32,7 @@ public class LoginFilter implements Filter{
 		String path=request.getRequestURI();
 		user=(User)request.getSession().getAttribute("user");
 		RequestDispatcher rd = null;
-		if(path.endsWith("relesee/login.jsp")||path.endsWith("relesee/index.jsp")){
+		if(path.endsWith("relesee/login.jsp")||path.endsWith("relesee/index.jsp")||path.endsWith("user/login")){
 		
 		}
 		else if(user==null){
@@ -40,9 +40,7 @@ public class LoginFilter implements Filter{
 		}else{
 			
 		} 
-		
-		 chain.doFilter(req, response);			
-		
+		 chain.doFilter(req, response);				
 	}
 
 	@Override
