@@ -63,6 +63,4 @@
 	   </bean>
 	   <!-- 该 BeanPostProcessor 将自动对标注@Autowired 的 Bean 进行注入 -->    
 
-  <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> 
-	<bean class="services.LoginServiceImpl" id="userService"></bean>
 </beans>
