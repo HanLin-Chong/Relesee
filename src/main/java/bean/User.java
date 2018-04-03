@@ -1,4 +1,4 @@
-package domain;
+package bean;
 
 import java.io.Serializable;
 
@@ -13,6 +13,8 @@ public class User implements Serializable{
 	private String deptid="";
 	
 	private String password="";
+	
+	private String emial;
 	
 	private int userauth=0;
 

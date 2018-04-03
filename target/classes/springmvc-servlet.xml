@@ -13,6 +13,11 @@
 		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
 	    http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context.xsd">
+		
+		<!-- 更具不同的配置文件类型，把配置文件分成不同的部分，便于后期的系统维护 -->
+		<import resource="spring-aop.xml"/>
+		<import resource="spring-domain.xml"/>
+		
 	<mvc:interceptors>
 	 	<mvc:interceptor>
 	 		<!-- 标识要拦截的路径 -->
@@ -52,13 +57,7 @@
 		<property name="dataSource" ref="dataSource"></property>
 	 </bean>
 	
-  <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> 
-	<bean class="services.LoginServiceImpl" id="userService"></bean>
-	<bean class="dao.daoImpl.UserDaoImpl" id="userDao"></bean>
-	
 <!-- 开启aspect对spring的支持 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />  
 	<bean id="logAspect" class="aop.LoginServiceAspect"></bean>
-
-
 </beans>

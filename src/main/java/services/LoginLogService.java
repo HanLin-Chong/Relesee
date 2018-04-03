@@ -11,7 +11,6 @@ public class LoginLogService {
 
 	private UserLoginLogDaoImpl logDao;
 	public LoginLogService() {
-		// TODO Auto-generated constructor stub
 	}
 	public boolean addLog(UserLoginLog loginLog){
 			

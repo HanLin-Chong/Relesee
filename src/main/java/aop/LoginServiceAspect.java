@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import domain.User;
+import bean.User;
 import domain.UserLoginLog;
 import services.LoginServiceImpl;
 /**
@@ -41,7 +41,7 @@ public class LoginServiceAspect {
     	if((boolean)returnValue == true){
     		System.out.println("系统以保存日志");
     		/*
-    		 * TODO 在这里写入记录用户登录的日志
+    		 * TODO 在这里写入记录用户登录的日志,使用spring的自动注 @autoworied可以将LogDao注入到这个地方
     		 */
     	}
     	else{

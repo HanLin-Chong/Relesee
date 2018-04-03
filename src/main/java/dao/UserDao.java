@@ -2,7 +2,7 @@ package dao;
 
 import java.util.Map;
 
-import domain.User;
+import bean.User;
 
 public interface UserDao {
 	public User findById(String userid);

@@ -3,10 +3,13 @@ package dao.daoImpl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import bean.User;
 import dao.UserLoginLogDao;
-import domain.User;
 import domain.UserLoginLog;
 
+/*
+ * 
+ */
 public class UserLoginLogDaoImpl implements UserLoginLogDao{
 
 	@Override

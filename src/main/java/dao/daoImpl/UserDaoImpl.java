@@ -6,8 +6,9 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import bean.User;
 import dao.UserDao;
-import domain.User;
 /**
  * 
  * @author JinFeng

@@ -2,7 +2,7 @@ package services;
 
 import org.springframework.stereotype.Service;
 
-import domain.User;
+import bean.User;
 
 @Service
 public interface LoginService {
