@@ -45,7 +45,7 @@
 	   	
 	   	 <context:property-placeholder location="classpath:jdbc.properties"/> 
 	 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-	 	<property name="user" value="sa"></property>
+	 	<property name="user" value="hds429174102"></property>
 	 	<property name="password" value="${password}"></property>
 	 	<property name="initialPoolSize" value="${initPoolSize}"></property>
 	 	<property name="jdbcUrl" value="${jdbcUrl}"></property>
