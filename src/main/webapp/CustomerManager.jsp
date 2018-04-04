@@ -7,6 +7,7 @@
     
     <title>index</title>
     <meta charset="utf-8">
+
     
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<!-- AmazeUI 
 	<link rel="stylesheet" type="text/css" href="css/amazeui.min.css"/>-->
+
     <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
     <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
     <!--[if lt IE 9]>
@@ -29,9 +31,11 @@
 	 
 	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
     <script src="js/jquery-1.11.0.min.js"></script>
+
     <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
     <!-- AmazeUI 
 	<script type="text/javascript" src="js/amazeui.min.js"></script> -->
+
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -82,6 +86,7 @@
               <ul>
                   <li class="header-menu"><span>业务处理</span></li>
                   <li class="sidebar-dropdown">
+
                       <a  href="#" ><i class="fa fa-file"></i><span>资料管理</span><span class="label label-danger">New</span></a>
                       <div class="sidebar-submenu">
                           <ul>
@@ -98,6 +103,7 @@
                   <li><a href="#"><i class="fa fa-tv"></i><span>用户权限管理</span></a></li>                   
                   <li><a href="#"><i class="fa fa-photo"></i><span>已上传资料</span></a></li>
                   
+
               </ul>
              </div><!-- sidebar-menu  -->           
           </div><!-- sidebar-content  -->
@@ -111,6 +117,7 @@
       </nav><!-- sidebar-wrapper  -->
       <main class="page-content">
       <!-- body -->
+
           	<center>
 	          	<!--<a href="#" class="trigger-success">Success</a>
 	          	<li><a href="#" class="trigger-info" data-iziToast>Info</a></li>
@@ -177,5 +184,6 @@
   	
   	*/
   </script>
+
   </body>
 </html>
