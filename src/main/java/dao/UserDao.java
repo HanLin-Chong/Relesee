@@ -1,7 +1,4 @@
 package dao;
-
-import java.util.Map;
-
 import bean.User;
 
 public interface UserDao {
