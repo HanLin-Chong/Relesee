@@ -17,12 +17,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
-  
   <body>
+  <div class="card"> 
 	<form method="post" action="upload/ajax/singlefile" enctype="multipart/form-data">
   		<input type="file" name="file"><br>
   		文件描述<input type="text" name="description"><br>
   		<input type="submit" value="提交">
   	</form>
+  </div>
   </body>
 </html>
