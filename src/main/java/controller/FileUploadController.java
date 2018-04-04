@@ -43,6 +43,9 @@ public class FileUploadController {
 		try{
 			file.transferTo(targetFile);
 			logger.info("文件已上传成功");
+			/**
+			 * TODO  在这里添加有关上传文件的相关数据库操作  将文件的相对路径保存至数据库
+			 */
 		}catch(Exception e){
 		 e.printStackTrace();
 		}
@@ -50,7 +53,7 @@ public class FileUploadController {
 		try {
 			response.getWriter().write("文件已上传成功");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 	}
