@@ -29,7 +29,7 @@ public class AuthInterceptor  implements HandlerInterceptor{
 	  * 
 	  * 在此处实现权限的控制，从session中取出用户的相关信息，核对用户的相关权限
 	  * 核对完成之后可以自己对respons做出相对应的处理
-	  *
+	  * 向客户端放回没有权限的信息
 	  */
 	 @Override
 	 public boolean preHandle(HttpServletRequest request,HttpServletResponse response,Object handler) throws Exception{
@@ -38,9 +38,7 @@ public class AuthInterceptor  implements HandlerInterceptor{
 		 if(handler instanceof HandlerMethod){
 			 Auth auth = ((HandlerMethod) handler).getMethod().getAnnotation(Auth.class);
 			if(auth!=null){
-				if(request.getSession().getAttribute(SESSION_USERID) == null){
-				
-					
+				if(request.getSession().getAttribute(SESSION_USERID) == null){					
 				}
 			} else {// 登录了检查,方法上只是@Auth,表示只要求登录就能通过.@Auth("authority")这类型,验证用户权限  
                 if (!"".equals(auth.value())) {  

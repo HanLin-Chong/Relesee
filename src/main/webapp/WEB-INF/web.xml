@@ -75,4 +75,15 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+<!-- 
+	登录过滤，过滤没有登录的用户
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+  		<filter-class>filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+  		<filter-name>LoginFilter</filter-name>
+ 		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+ -->
 </web-app>
