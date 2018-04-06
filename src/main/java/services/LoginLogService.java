@@ -3,7 +3,7 @@ package services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dao.daoImpl.UserLoginLogDaoImpl;
+import dao.impl.UserLoginLogDaoImpl;
 import domain.UserLoginLog;
 
 

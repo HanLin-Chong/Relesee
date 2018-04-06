@@ -1,4 +1,4 @@
-package dao.daoImpl;
+package dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,7 +15,7 @@ import dao.UserDao;
  *  UserDaoImpl 继承BaseDao
  */
 @Repository("userDao")
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
 
 	@Autowired 
 	private JdbcTemplate jdbcTemplate;

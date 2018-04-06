@@ -1,30 +1,22 @@
 package bean;
 
-/**
- * 
- * @author JinFeng
- * 排队的单个项目表，相对应的数据为RankLines中的一行数据
- */
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class RankItem {
-	// 队列项目编号
 	private String ranklinesid;
-	//  对应的管理员编号
 	private String managersid;
-	//在队列中对应的排队位置
+	private	String usernumber;
 	private String linesnumber;
-	// 文件的相对位置
 	private String filesurl;
-	// 项目审核的状态
 	private String states;
-	// 是否为最新的文件
-	private boolean isnewfiles;
-	//  文件上传的日期
+	private String isnewfiles;
 	private String uploaddate;
+	private String managerstype;
 	
-	// 当前项目处理的日期
-	private String resultDate;
-	//管理员的类型
-	private String managertype;
+	public  RankItem(){
+		ranklinesid=this.generateRankId();
+	}
 	public String getRanklinesid() {
 		return ranklinesid;
 	}
@@ -36,6 +28,12 @@ public class RankItem {
 	}
 	public void setManagersid(String managersid) {
 		this.managersid = managersid;
+	}
+	public String getUsernumber() {
+		return usernumber;
+	}
+	public void setUsernumber(String usernumber) {
+		this.usernumber = usernumber;
 	}
 	public String getLinesnumber() {
 		return linesnumber;
@@ -55,16 +53,11 @@ public class RankItem {
 	public void setStates(String states) {
 		this.states = states;
 	}
-	public boolean isIsnewfiles() {
+	public String getIsnewfiles() {
 		return isnewfiles;
 	}
-	// 是否文件为最新的文件，当为最新的文件的时候即为true
-	public void setIsnewfiles(int i) {
-		if(i==0){
-			this.isnewfiles=true;
-		}else{
-		    isnewfiles = false;
-		}
+	public void setIsnewfiles(String isnewfiles) {
+		this.isnewfiles = isnewfiles;
 	}
 	public String getUploaddate() {
 		return uploaddate;
@@ -72,17 +65,19 @@ public class RankItem {
 	public void setUploaddate(String uploaddate) {
 		this.uploaddate = uploaddate;
 	}
-	public String getResultDate() {
-		return resultDate;
+	public String getManagerstype() {
+		return managerstype;
 	}
-	public void setResultDate(String resultDate) {
-		this.resultDate = resultDate;
-	}
-	public String getManagertype() {
-		return managertype;
-	}
-	public void setManagertype(String managertype) {
-		this.managertype = managertype;
+	public void setManagerstype(String managerstype) {
+		this.managerstype = managerstype;
 	}
 	
+	
+	public String generateRankId(){
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+		String dateToString = "RK"+format.format(date).toString();
+		return dateToString;
+	}
+
 }

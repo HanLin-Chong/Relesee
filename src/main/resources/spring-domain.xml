@@ -10,6 +10,7 @@
 	    http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context.xsd">
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> 
+	    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> 
 	<bean class="services.LoginServiceImpl" id="userService"></bean>
-	<bean class="dao.daoImpl.UserDaoImpl" id="userDao"></bean>
+	<bean class="dao.impl.UserDaoImpl" id="userDao"></bean>
 </beans>

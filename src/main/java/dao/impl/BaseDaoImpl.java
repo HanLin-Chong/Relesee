@@ -1,6 +1,7 @@
-package dao;
+package dao.impl;
 
 import java.sql.ResultSet;
+
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -10,7 +11,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-
+import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
+import org.springframework.stereotype.Repository;
 import dbconn.JDBCUtil;
 
 /**
@@ -20,13 +22,17 @@ import dbconn.JDBCUtil;
  * @return boolean 返回true标识操作成功
  * @param 表示参数 ,如果sql语句中没有通配符，请将这个参数设置为null
  */
-public class BaseDao {
-	@Autowired
-	protected JdbcTemplate jdbcTemplate;
+@Repository("baseDao")
+public class BaseDaoImpl {
+	@Autowired 
+	private JdbcTemplate jdbcTemplate;
 	
 	/*
 	 * 更具是否查询的语句中是否有通配符 进行查询
 	 */
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate){
+		this.jdbcTemplate = jdbcTemplate;
+	}
 	public boolean updateByParam(String sql,Object[] args0){
 		if(args0==null|| args0.length==0){
 			if(jdbcTemplate.update(sql)>0){
@@ -50,6 +56,12 @@ public class BaseDao {
 		return jdbcTemplate.query(sql,new IRowMapper(), arg0);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public <T> List<T> find(String sql,Class<T> t){
+		RowMapper<T> rowMapper =ParameterizedBeanPropertyRowMapper.newInstance(t);
+		return this.jdbcTemplate.query(sql, rowMapper);
+	}
+	
 	/*
 	 * 把数据库中的列名取出，放在map中，其中map的key与列名相同，即表示列名与想赌赢
 	 */
@@ -63,6 +75,6 @@ public class BaseDao {
 			}
 			return row;
 		}
-		
 	}
+
 }

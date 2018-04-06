@@ -33,6 +33,7 @@
 		<!-- 配置spring的扫描机制-->
 	   <context:component-scan base-package="controller"></context:component-scan>
 	   <context:component-scan base-package="services"/>
+	   <context:component-scan base-package="dao.impl"/>
 	   <!-- 为Controller中的ModelAndView中的路径添加前缀和后缀名  在Controller只需要写名字就可以
 	   	viewresolver 师视图解析器
 	    -->

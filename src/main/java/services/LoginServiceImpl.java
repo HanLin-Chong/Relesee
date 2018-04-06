@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import bean.User;
 import dao.UserDao;
 import dao.UserLoginLogDao;
-import dao.daoImpl.UserDaoImpl;
+import dao.impl.UserDaoImpl;
 
 /**
  * 
