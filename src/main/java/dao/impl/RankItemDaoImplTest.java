@@ -26,12 +26,10 @@ public class RankItemDaoImplTest {
 	  RankItemDaoImpl dao = new RankItemDaoImpl();
 	  dao.setJdbcTemplate(jdbcTemplate);
 	  List<RankItem> list = new ArrayList<RankItem>();
-	  list = dao.findWithDiffScope(4, 10);
-	  Iterator iter = (Iterator) list.iterator();
-	  while(iter.hasNext()){
-		  RankItem item = (RankItem) iter.next();
-		  System.out.println(item.getFilesurl());
-		  
+	
+	  if(dao.updateIsNewFile(0, "RK20180405123228")){
+		  System.out.println("操作执行成功");
 	  }
+	  
 	}
 }

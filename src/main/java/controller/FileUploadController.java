@@ -80,6 +80,15 @@ public class FileUploadController {
 				e.printStackTrace();
 			}
 			logger.info("文件上传成功");
+			StringBuffer buff = new StringBuffer("[");
+			buff.append("{\"msg\":"+"\"msg\",");
+			buff.append("\"value\":"+"\"文件上传成功\"}]");
+			System.out.println(buff.toString());
+			try {
+				response.getWriter().write(buff.toString());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

@@ -11,7 +11,8 @@ public interface RankItemDao {
 	
 	//查找一定范围内的项目
 	public List<RankItem> findWithDiffScope(int low,int heigh);
-	
-	
+	//更具某一列查找某一范围的的排序
 	public List<RankItem> findWithDiffScopeOrderBy(int low, int high, String orderColumn);
+	//
+	public boolean update(String column,Object[] obj);
 }
