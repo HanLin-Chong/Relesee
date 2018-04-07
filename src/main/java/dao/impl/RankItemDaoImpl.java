@@ -1,18 +1,13 @@
 package dao.impl;
 
-import java.util.ArrayList;
 
 import java.util.List;
-import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
+
+import org.springframework.stereotype.Repository;
 
 import bean.RankItem;
 import dao.RankItemDao;
-import util.IMapperUtil;
+@Repository("rankItemDao")
 public class RankItemDaoImpl  extends BaseDaoImpl implements RankItemDao{
 	@Override
 	public boolean insertRankitem(RankItem rankItem) {
@@ -28,6 +23,9 @@ public class RankItemDaoImpl  extends BaseDaoImpl implements RankItemDao{
 		return this.updateByParam(sql, args);
 	}
 
+	/*
+	 * TODO 未完成，待补充
+	 */
 	@Override
 	public List<RankItem> findByManagerId(String managerId) {
 		List<RankItem> itemList;
@@ -37,8 +35,6 @@ public class RankItemDaoImpl  extends BaseDaoImpl implements RankItemDao{
 
 	@Override
 	public List<RankItem> findWithDiffScope(int low, int high) {
-		List<RankItem> itemList;
-		String sql = "select top "+high+" * from orderlines";
 		return this.findWithDiffScopeOrderBy(low, high, "RankLinesId ");
 	}
 
@@ -47,5 +43,29 @@ public class RankItemDaoImpl  extends BaseDaoImpl implements RankItemDao{
 		String sql="select top "+high+" *from RankLines where RankLinesId not in ";
 		sql+="(select top "+low+" ranklinesid from RankLines ) order by "+orderColumn;
 		return  this.find(sql, RankItem.class);
+	}
+
+
+	
+	public boolean updateIsNewFile(int isNewFile,String ranklinesid){
+		String currentColumn="isnewFiles";
+		Object[] obj=new Object[]{
+			isNewFile,
+			ranklinesid
+		};
+		return this.update(currentColumn, obj);
+	}
+	
+	/**
+	 * (non-Javadoc)
+	 * @see dao.RankItemDao#upldate(java.lang.String, java.lang.Object[])
+	 * @return 若执行更新成功则放回true
+	 * @param column 需要更新的列，obj数据包括两个部分，第一位所要更新的新值，第二个id所要更新列的id值
+	 */
+	@Override
+	public boolean update(String column, Object[] obj) {	
+		String sql = "update ranklines set "+column+"=? where "+"ranklinesid=?";
+		return this.updateByParam(sql, obj);
+		
 	}
 }
