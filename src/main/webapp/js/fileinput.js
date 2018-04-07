@@ -2321,7 +2321,7 @@
                     isImage = ifSet('image', settings, defaultFileTypeSettings.image);
 
                     if (isText(file.type, caption)) {
-                        reader.readAsText(file, self.textEncoding);
+                        reader.(file, self.textEncoding);
                     } else {
                         if (isImage(file.type, caption)) {
                             reader.readAsDataURL(file);
@@ -3282,7 +3282,7 @@
         dropZoneTitleClass: 'file-drop-zone-title',
         fileActionSettings: {},
         otherActionButtons: '',
-        textEncoding: 'UTF-8',
+        textEncoding: 'GBK',
         ajaxSettings: {},
         ajaxDeleteSettings: {},
         showAjaxErrorDetails: true
