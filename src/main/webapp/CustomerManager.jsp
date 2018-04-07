@@ -27,6 +27,7 @@
 	<link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css" />
 	<link rel="stylesheet" href="css/custom.css">
+	<!-- iziToast -->
 	<link rel="stylesheet" href="css/iziToast.min.css">
 	 
 	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
@@ -38,11 +39,11 @@
 
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/fileinput.js"></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/custom.js"></script>
+    <!-- iziToast -->
     <script src="js/iziToast.min.js" type="text/javascript"></script>
-    <script src="js/ToastTrigger.js" type="text/javascript"></script>
+    <!-- <script src="js/ToastTrigger.js" type="text/javascript"></script>-->
     <style>
     	.label{
     		float:left;
