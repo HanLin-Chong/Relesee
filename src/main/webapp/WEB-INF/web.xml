@@ -42,6 +42,14 @@
 		<servlet-name >default </servlet-name >           
 		<url-pattern >*.map</url-pattern>        
 	</servlet-mapping > 
+	<servlet-mapping>
+		<servlet-name >default </servlet-name >           
+		<url-pattern >*.woff</url-pattern>        
+	</servlet-mapping > 
+	<servlet-mapping>
+		<servlet-name >default </servlet-name >           
+		<url-pattern >*.woff2</url-pattern>        
+	</servlet-mapping > 
 	<!-- 配置springmvc的基本配置 -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
