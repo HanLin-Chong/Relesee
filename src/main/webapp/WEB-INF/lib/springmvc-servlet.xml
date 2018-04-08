@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+	    http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd">
+	<mvc:interceptors>
+	 	<mvc:interceptor>
+	 		<!-- 标识要拦截的路径 -->
+	 	   <mvc:mapping path="/**" />
+	 	   <mvc:mapping path="/**.jsp"/>
+	 	    <mvc:mapping path="/**/*.jsp"/>
+            <!-- 处理拦截的具体实现类 -->
+            <bean class="interceptor.AuthInterceptor"> 
+            <!-- 一下表示的是不要拦截的路径 -->
+            </bean>
+	 	</mvc:interceptor>	
+	 </mvc:interceptors>
+		<!-- 配置spring的扫描机制-->
+	   <mvc:annotation-driven />  
+	   <context:component-scan base-package="controller"></context:component-scan>
+	   <context:component-scan base-package="services"/>
+	   
+	   <!-- 为Controller中的ModelAndView中的路径添加前缀和后缀名  在Controller只需要写名字就可以
+	   	viewresolver 师视图解析器
+	    -->
+	    
+	  
+	   <!-- 配置MultipartResolve用于文件的上传 -->
+	   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	 	    <property name="defaultEncoding" value="UTF-8"></property>
+	   		<property name="maxUploadSize" value="540000"></property>
+	   		<property name="uploadTempDir" value="uploadfiles"></property>
+	   	</bean>
+	   	
+	   	 <context:property-placeholder location="classpath:jdbc.properties"/> 
+	 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	 	<property name="user" value="${username}"></property>
+	 	<property name="password" value="${password}"></property>
+	 	<property name="initialPoolSize" value="${initPoolSize}"></property>
+	 	<property name="driverClass" value="${driverClass}"></property>
+	 	<property name="maxPoolSize" value="${maxPoolSize}"></property>
+	 <!-- 配置spring 的JdbcTemplate -->
+	 </bean>
+	 <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	 </bean>
+	 
+	   <!-- 为Controller中的ModelAndView中的路径添加前缀和后缀名  在Controller只需要写名字就可以
+	   	viewresolver 师视图解析器
+	    -->
+	   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="internalResource">
+	   		<!-- <property name="prefix" value="/jsp/"></property>-->
+	   		<property name="suffix" value=".jsp"></property>
+	   </bean>
+	   <!-- 该 BeanPostProcessor 将自动对标注@Autowired 的 Bean 进行注入 -->    
+
+</beans>
