@@ -1,17 +1,15 @@
 package dao.impl;
 
 import java.sql.ResultSet;
-
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
+import org.springframework.jdbc.core.*;
 import org.springframework.stereotype.Repository;
 import dbconn.JDBCUtil;
 
@@ -58,7 +56,7 @@ public class BaseDaoImpl {
 	
 	@SuppressWarnings("unchecked")
 	public <T> List<T> find(String sql,Class<T> t){
-		RowMapper<T> rowMapper =ParameterizedBeanPropertyRowMapper.newInstance(t);
+		RowMapper<T> rowMapper =BeanPropertyRowMapper.newInstance(t);
 		return this.jdbcTemplate.query(sql, rowMapper);
 	}
 	
