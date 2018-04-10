@@ -1,4 +1,4 @@
-/*!
+/*!             搜索://here,为改动的地方
  * bootstrap-fileinput v4.3.6
  * http://plugins.krajee.com/file-input
  *
@@ -442,7 +442,7 @@
         pdf: tTagBef2 + tPdf + tTagAft,
         other: tTagBef2 + tOther + tTagAft
     };
-    defaultPreviewTypes = ['image', 'html', 'text', 'video', 'audio', 'flash', 'pdf', 'object'];
+    defaultPreviewTypes = ['image', 'html', 'text', 'video', 'audio', 'flash', 'pdf',];//here 允许预览哪些对象
     defaultPreviewSettings = {
         image: {width: "auto", height: "160px"},
         html: {width: "213px", height: "160px"},
@@ -1034,7 +1034,7 @@
             }
         },
         _submitForm: function () {
-            var self = this, $el = self.$element, files = $el.get(0).files;
+            var self = this, $el = self.$element, files = $el.get(0).files;//here $el在这里定义
             if (files && self.minFileCount > 0 && self._getFileCount(files.length) < self.minFileCount) {
                 self._noFilesError({});
                 return false;
@@ -1377,15 +1377,19 @@
                 index = parseInt(index.replace('init_', ''));
                 config = isEmpty(cache.config) && isEmpty(cache.config[index]) ? null : cache.config[index];
                 extraData = isEmpty(config) || isEmpty(config.extra) ? deleteExtraData : config.extra;
+                
                 if (typeof extraData === "function") {
                     extraData = extraData();
                 }
                 params = {id: $el.attr('id'), key: vKey, extra: extraData};
+                
+                var myformdata= new FormData(document.getElementById("myform"));//here
+                console.log(myformdata);
                 settings = $.extend(true, {}, {
                     url: vUrl,
                     type: 'POST',
                     dataType: 'json',
-                    data: $.extend(true, {}, {key: vKey}, extraData),
+                    data: $.extend(true, {}, {key: vKey}, extraData),//$('#myform').serialize(),//myformdata,
                     beforeSend: function (jqXHR) {
                         self.ajaxAborted = false;
                         self._raise('filepredelete', [vKey, jqXHR, extraData]);
@@ -1622,6 +1626,14 @@
             var self = this, settings;
             self._raise('filepreajax', [previewId, index]);
             self._uploadExtra(previewId, index);
+            //here
+            //var myformdata = new FormData();
+            //var myfile = document.querySelector('[type=file]');
+           // myformdata.append('upload', myfile.files[0]);
+            //myformdata.append("notes","test notes");
+            //console.log(myformdata);
+            var getmynotes=$("#notes").val();
+            self.formdata.append("notes",getmynotes);//!!!!!!!!!!!!!!!!!关键之处！！！！！
             settings = $.extend(true, {}, {
                 xhr: function () {
                     var xhrobj = $.ajaxSettings.xhr();
@@ -1631,6 +1643,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: self.formdata,
+                //data:myformdata,
                 cache: false,
                 processData: false,
                 contentType: false,
@@ -1639,6 +1652,7 @@
                 complete: fnComplete,
                 error: fnError
             }, self.ajaxSettings);
+            //alert(9);//here
             self.ajaxRequests.push($.ajax(settings));
         },
         _initUploadSuccess: function (out, $thumb, allFiles) {

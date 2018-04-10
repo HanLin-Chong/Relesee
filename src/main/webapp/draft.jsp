@@ -52,21 +52,22 @@
 	
 	*/
 	
-	JSONArray array=new JSONArray();
+	//JSONArray array=new JSONArray();
 
 		 
 
-	JSONObject lan1=new JSONObject();
+	//JSONObject lan1=new JSONObject();
 		
 
-	lan1.put("id", 1);
+	//lan1.put("id", 1);
 
-	lan1.put("name", "Java");
+	//lan1.put("name", "Java");
 
-	lan1.put("ide", "Eclipse");
+	//lan1.put("ide", "Eclipse");
 	
-	String returnjson=lan1.toString();
-	response.getWriter().write(returnjson);
+	//String returnjson=lan1.toString();
+	String test=request.getParameter("test");
+	response.getWriter().write(test);
 	
 
 

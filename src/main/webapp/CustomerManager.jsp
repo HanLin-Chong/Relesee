@@ -24,7 +24,8 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-	<link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css" />
 	<link rel="stylesheet" href="css/custom.css">
 	<!-- iziToast -->
@@ -46,7 +47,7 @@
     <!-- <script src="js/ToastTrigger.js" type="text/javascript"></script>-->
     <style>
     	.label{
-    		float:left;
+    		floa t:left;
     		margin-left:5px;
     	}
     </style>
@@ -94,7 +95,7 @@
                           <ul>
                               <li class="pageloder-trigger" whichpage="fileupload.html"><a href="#">上传资料 <span class="label label-success">10</span></a> </li>
                               <li><a href="#">已审核资料</a></li>
-                              <li><a href="#">其它</a></li>
+                              <li class="pageloder-trigger" whichpage="AuditState.html"]><a href="#">查看审核状态</a></li>
                               
                           </ul>
                       </div>
