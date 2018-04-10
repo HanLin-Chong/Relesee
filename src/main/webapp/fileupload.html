@@ -22,17 +22,15 @@
     </head>
     <body>
     <div class=".col-lg-">
-    	<form enctype="multipart/form-data">
+    	<form id="myform" method="post" action="upload/ajax/multifile" enctype="multipart/form-data">
     		<label>请上传资料</label>
 
     		<div class="input-group" >
 
 			  <span class="input-group-addon" id="basic-addon3">如有需要请添加备注：</span>
-			  <textarea class="form-control" name="notes" rows="5"></textarea>
+			  <textarea id="notes" class="form-control" name="notes" rows="5"></textarea>
 			</div>
 			<input id="uploadfile" name="files" type="file" multiple>
-    		
-    		
     		
     	</form>
     </div>           
@@ -43,17 +41,22 @@
         language: 'zh',
         uploadUrl: 'upload/ajax/multifile',
         allowedFileExtensions : ['rar', 'zip','txt','jpg'],
-		allowedPreviewTypes : false,
+		//allowedPreviewTypes : false,
 		//showRemove:false,
 		dropZoneEnabled: true,
 		browseOnZoneClick:true,
 		textEncoding:'UTF-8',
-		removeFromPreviewOnError:true
+		removeFromPreviewOnError:true,
 		
 		
     });
+    
+    
+    
+    
     $(document).ready(function(){
     	//异步上传返回结果处理
+    	
 		$("#uploadfile").on("fileuploaded", function (event, data, previewId, index) {
 			var response = data.response;
 			iziToast.show({
@@ -62,8 +65,18 @@
 			    color:'blue',
 			    layout:1
 			});
-		    console.log("after");
-		    console.log(response);
+			
+			//var notes = $("#notes").val();
+			//if(notes != "" || notes != null){
+				
+			//}
+			
+			
+			
+			
+			
+		    //console.log("after");
+		    //console.log(response);
 		});        
 		//上传前
 		$('#uploadfile').on('filepreupload', function(event, data, previewId, index) {
@@ -72,6 +85,9 @@
     		//console.log("efore");
     		//console.log(response);
     		
+		});
+		$("#submit").click(function(){
+			$("#form").submit();
 		});
     });
 	

@@ -4,10 +4,16 @@ import java.io.File;
 
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -64,11 +70,15 @@ public class FileUploadController {
 	}
 	@RequestMapping("ajax/multifile")
 	public void multifileupload(MultiFileDomain multiFileDoamin, HttpServletRequest request,HttpServletResponse response){
+		
+		String desc = request.getParameter("notes");
+		System.out.println(desc);
 		String realPath = request.getServletContext().getRealPath("uploadfiles");
 		File targetDir = new File(realPath);
 		if(!targetDir.exists()){
 			targetDir.mkdir();
 		}
+		
 		List<MultipartFile> files = (List<MultipartFile>) multiFileDoamin.getFiles();
 		for(int i=0;i<files.size();i++){
 			MultipartFile  file = files.get(i);
@@ -91,5 +101,5 @@ public class FileUploadController {
 			}
 		}
 	}
-
+	
 }
