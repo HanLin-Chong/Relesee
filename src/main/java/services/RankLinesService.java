@@ -19,7 +19,7 @@ public class RankLinesService {
 	private JdbcTemplate jdbcTemplate;
 	
 	public List<RankItem> getRankItems(String status){
-		if("".equals(status) || status==null) status = "待审核";
+		if("".equals(status) || status==null) status = "排队待审核";
 		this.rankItemDao.setJdbcTemplate(jdbcTemplate);
 		String sql = "select * from ranklines where states="+"'"+status+"'";
 		return this.rankItemDao.find(sql, RankItem.class);
