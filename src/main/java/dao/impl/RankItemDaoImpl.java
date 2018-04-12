@@ -28,7 +28,6 @@ public class RankItemDaoImpl  extends BaseDaoImpl implements RankItemDao{
 	 */
 	@Override
 	public List<RankItem> findByManagerId(String managerId) {
-		List<RankItem> itemList;
 		String sql = "select * from ranklines where managerid="+"'"+managerId+"'";
 		return null; 
 	}
@@ -67,5 +66,11 @@ public class RankItemDaoImpl  extends BaseDaoImpl implements RankItemDao{
 		String sql = "update ranklines set "+column+"=? where "+"ranklinesid=?";
 		return this.updateByParam(sql, obj);
 		
+	}
+
+	@Override
+	public List<RankItem> findWidthStatus(String status) {
+		String sql = "select * from ranklines where states="+"'"+status+"'";
+		return this.find(sql, RankItem.class);
 	}
 }

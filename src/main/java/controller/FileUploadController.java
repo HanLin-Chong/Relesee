@@ -75,11 +75,13 @@ public class FileUploadController {
 		System.out.println(desc);
 		String realPath = request.getServletContext().getRealPath("uploadfiles");
 		File targetDir = new File(realPath);
+		String description = request.getParameter("description");
 		if(!targetDir.exists()){
 			targetDir.mkdir();
 		}
 		
 		List<MultipartFile> files = (List<MultipartFile>) multiFileDoamin.getFiles();
+		List<String> descriptions = (List<String>) multiFileDoamin.getDescription(); 
 		for(int i=0;i<files.size();i++){
 			MultipartFile  file = files.get(i);
 			String filename = file.getOriginalFilename();
@@ -89,17 +91,19 @@ public class FileUploadController {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			logger.info("文件上传成功");
-			StringBuffer buff = new StringBuffer("[");
-			buff.append("{\"title\":"+"\"文件上传\",");
-			buff.append("\"message\":"+"\"文件上传成功\"}]");
-			System.out.println(buff.toString());
-			try {
-				response.getWriter().write(buff.toString());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			logger.info(description);
+			System.out.println(description);
 		}
+		StringBuffer buff = new StringBuffer("[");
+		buff.append("{\"title\":"+"\"文件上传\",");
+		buff.append("\"message\":"+"\"文件上传成功\"}]");
+		System.out.println(buff.toString());
+		try {
+			response.getWriter().write(buff.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	
 	}
 	
 }
