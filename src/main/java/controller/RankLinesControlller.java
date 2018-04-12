@@ -21,13 +21,17 @@ public class RankLinesControlller {
 	
 	@Autowired
 	private RankLinesService rankLinesService;
-	@RequestMapping("/get/ranklines")
+	@RequestMapping("/get/withstatus")
 	
 	public void findRankLiensWithStatuts(String status,HttpServletRequest req,HttpServletResponse resp){
+		resp.setHeader("Content-type", "text/html;charset=UTF-8");  
 		List<RankItem> mList = new ArrayList<RankItem>();
 		mList = rankLinesService.getRankItems(status);
 		JSONArray json = JSONArray.fromObject(mList);
 		try {
+			System.out.println(json.toString());
+			resp.setCharacterEncoding("utf-8");
+			
 			resp.getWriter().write(json.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
