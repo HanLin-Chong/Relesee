@@ -47,7 +47,7 @@
     <!-- <script src="js/ToastTrigger.js" type="text/javascript"></script>-->
     <style>
     	.label{
-    		floa t:left;
+    		float:left;
     		margin-left:5px;
     	}
     </style>
@@ -94,7 +94,7 @@
                       <div class="sidebar-submenu">
                           <ul>
                               <li class="pageloder-trigger" whichpage="fileupload.html"><a href="#">上传资料 <span class="label label-success">10</span></a> </li>
-                              <li><a href="#">已审核资料</a></li>
+                              
                               <li class="pageloder-trigger" whichpage="AuditState.html"]><a href="#">查看审核状态</a></li>
                               
                           </ul>
