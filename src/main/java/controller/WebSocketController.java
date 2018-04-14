@@ -2,8 +2,10 @@ package controller;
 
 import java.io.IOException;
 
-import org.apache.commons.logging.LogFactory;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,21 +17,16 @@ import websocket.MyWebSocketHandler;
 @RequestMapping()
 public class WebSocketController {
 	private final org.apache.commons.logging.Log logger =LogFactory.getLog(WebSocketController.class);
-	  @Bean//这个注解会从Spring容器拿出Bean
-	    public MyWebSocketHandler myWebSocketHandler() {
-	        return new MyWebSocketHandler();
-	    }	
-	
+	 @Autowired private MyWebSocketHandler myWebSocketHandler;
 	@RequestMapping("/test")
-	public String sendMessage(){
+	public void sendMessage(HttpServletResponse resp){
 		TextMessage message = new TextMessage("This is a test");
 		try {
-			logger.debug("webSocket send message"+message.toString());
-			myWebSocketHandler().sendMessageToJsp(message,"" );
+			logger.info("webSocket send message"+message.toString());
+			myWebSocketHandler.sendMessageToTarget(message,"MSID_0000005");
+			resp.getWriter().write(message.toString());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "socket.jsp";
 	}
 }

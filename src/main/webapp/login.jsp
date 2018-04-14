@@ -176,7 +176,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    -->
 		    <form class="login-form" method="post" action="user/login">
 		      <input type="text" placeholder="账号" name="userid"/>
-		      <input type="password" placeholder="密码" name="password" />
+		      <input type="password" placeholder="密码" name="passwold" />
 		      <button id="login" type="submit">登录</button>
 		      <p class="message"> <a href="#" target="_blank"></a></p>
 		    </form>
@@ -192,10 +192,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	{
 	 var name=$("#user_name").val();
 	 var pass=$("#password").val();
-	 
 	 $.ajax({
 	 	url:"user/login",
-	 	data:{username:name,password:password},
+	 	data:{username:name,passwold:password},
 	 	async:false,method:"post",
 	 	success:function(data){
 	 	

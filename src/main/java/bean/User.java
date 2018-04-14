@@ -12,7 +12,7 @@ public class User implements Serializable{
 	
 	private String deptid="";
 	
-	private String password="";
+	private String passwold="";
 	
 	private String emial;
 	
@@ -42,12 +42,12 @@ public class User implements Serializable{
 		this.deptid = deptid;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPasswold() {
+		return passwold;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPasswold(String password) {
+		this.passwold = password;
 	}
 
 	public int getUserauth() {
@@ -60,7 +60,7 @@ public class User implements Serializable{
 
 	@Override
 	public String toString(){
-		return "Username:"+username+"password:"+password+"userid"+userid;
+		return "Username:"+username+"password:"+passwold+"userid"+userid;
 	}
 	
 }

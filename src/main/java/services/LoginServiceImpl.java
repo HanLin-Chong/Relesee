@@ -33,7 +33,7 @@ public class LoginServiceImpl implements LoginService{
 	
 	}
 	public boolean invalidPassword(User input,User query){
-		if(input!=null && input.getPassword().equals(query.getPassword()) && query!=null){
+		if(input!=null && input.getPasswold().equals(query.getPasswold()) && query!=null){
 			return true;
 		}
 		return false;

@@ -20,24 +20,19 @@
 		<!-- 更具不同的配置文件类型，把配置文件分成不同的部分，便于后期的系统维护 -->
 		<import resource="spring-aop.xml"/>
 		<import resource="spring-domain.xml"/>
-		
-	
-	 <!-- 	测试暂时此拦截器做出限制
-	 <mvc:interceptors>
+	<!-- 
+		 <mvc:interceptors>
 	 	<mvc:interceptor>
-	 		 标识要拦截的路径
 	 	   <mvc:mapping path="/**" />
 	 	   <mvc:mapping path="/**.jsp"/>
 	 	   <mvc:mapping path="/**/*.jsp"/>
-           处理拦截的具体实现类
            	<mvc:exclude-mapping path="/user/**"/>
-            <bean class="interceptor.AuthInterceptor"/> 
-          		一下表示的是不要拦截的路径
+            <bean class="interceptor.AuthInterceptor"/>      
 	 	</mvc:interceptor>	
 	 </mvc:interceptors>
-	 
-	 
-	  -->
+	 -->
+
+
 		<!-- 配置spring的扫描机制-->
 	   <context:component-scan base-package="controller"></context:component-scan>
 	   <context:component-scan base-package="services"/>

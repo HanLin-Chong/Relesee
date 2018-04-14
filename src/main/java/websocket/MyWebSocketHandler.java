@@ -17,11 +17,13 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import bean.User;
+
 @Component
 public class MyWebSocketHandler implements WebSocketHandler{
 	private final Log logger = LogFactory.getLog(MyWebSocketHandler.class);
 	
-	//用户保存用户对应session连接状态额map
+	//用户保存用户对应session连接状态map
 	public static final Map<String, WebSocketSession> userSocketSessionMap;
 	
 	static{
@@ -30,10 +32,13 @@ public class MyWebSocketHandler implements WebSocketHandler{
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		String jspCode = (String) session.getHandshakeAttributes().get("jspCode");
-		logger.info("jspCode"+jspCode);
-		if(userSocketSessionMap.get(jspCode)!=null){
-			userSocketSessionMap.put(jspCode, session);
+		String userid =(String)session.getHandshakeAttributes().get("jspCode");
+		/*
+		 * 当用户登录时时，将用户的id与session记录下来，用作之后的通信
+		 */
+		System.out.println(userid);
+		if(userSocketSessionMap.get(userid)== null){
+			userSocketSessionMap.put(userid, session);
 		}	
 		TextMessage message=new TextMessage("Helllo This is a Test");
 		this.handleMessage(session, message);
@@ -42,7 +47,6 @@ public class MyWebSocketHandler implements WebSocketHandler{
 	@Override
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
 		session.sendMessage(message);
-		
 	}
 
 	@Override
@@ -60,6 +64,11 @@ public class MyWebSocketHandler implements WebSocketHandler{
 		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.springframework.web.socket.WebSocketHandler#afterConnectionClosed(org.springframework.web.socket.WebSocketSession, org.springframework.web.socket.CloseStatus)
+	 *	 当连接被关闭时，将用户的信息与session移除
+	 */
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
 		System.out.println("WebSocket:"+session.getId()+"被关闭");
@@ -74,7 +83,7 @@ public class MyWebSocketHandler implements WebSocketHandler{
 
 	@Override
 	public boolean supportsPartialMessages() {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 	
@@ -102,6 +111,25 @@ public class MyWebSocketHandler implements WebSocketHandler{
 			}
 		}
 	}
+	/*
+	 * 向指定的用户发送webSocket消息
+	 * TODO 待补充消息的后台处理流程，包括发送消息的记录，无论发送成功与否
+	 */
+	public void sendMessageToTarget(final TextMessage message,String userid){
+		if(userSocketSessionMap.containsKey(userid)){
+			logger.info(message.toString()+" 消息已被转发至-->"+userid);
+			WebSocketSession session = userSocketSessionMap.get(userid);
+			try {
+
+				session.sendMessage(message);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
+			logger.info("当前用户不在线，消息被搁置");
+		}
+	
+	}
 	
 	public void sendMessageToJsp(final TextMessage message, String type) throws IOException{
 		Iterator<Entry<String, WebSocketSession>> iter = userSocketSessionMap.entrySet().iterator();
@@ -112,6 +140,7 @@ public class MyWebSocketHandler implements WebSocketHandler{
 					public void run(){
 						try{
 							if(entry.getValue().isOpen()){
+								logger.info("向"+entry.getKey()+"发送消息");
 								entry.getValue().sendMessage(message);
 							}
 						}catch(IOException e){
