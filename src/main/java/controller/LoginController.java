@@ -20,7 +20,6 @@ public class LoginController {
 	private LoginServiceImpl loginService;
 	@RequestMapping("/login")
 	public ModelAndView login(User user,HttpServletRequest req,Model model){
-		System.out.println(user);
 		if(loginService.login(user)){
 			System.out.println("登陆成功");
 			HttpSession session = req.getSession();
