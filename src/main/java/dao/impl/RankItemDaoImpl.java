@@ -12,13 +12,14 @@ public class RankItemDaoImpl  extends BaseDaoImpl implements RankItemDao{
 	@Override
 	public boolean insertRankitem(RankItem rankItem) {
 		String sql;
-		sql="insert into RankLines(ranklinesid,managersid,filesurl,uploaddate,managerstype) values(?,?,?,?,?)";
+		sql="insert into RankLines(ranklinesid,managerid,customerid,filesurl,uploaddate,customertype) values(?,?,?,?,?)";
 		Object[] args = new Object[]{
 				rankItem.getRanklinesid(),
-				rankItem.getManagersid(),
+				rankItem.getManagerid(),
+				rankItem.getCustomerid(),
 				rankItem.getFilesurl(),
 				rankItem.getUploaddate(),
-				rankItem.getManagerstype()
+				rankItem.getCustomertype()
 		};
 		return this.updateByParam(sql, args);
 	}
@@ -70,7 +71,7 @@ public class RankItemDaoImpl  extends BaseDaoImpl implements RankItemDao{
 
 	@Override
 	public List<RankItem> findWidthStatus(String status) {
-		String sql = "select * from ranklines where states="+"'"+status+"'";
+		String sql = "select * from ranklines where state="+"'"+status+"'";
 		return this.find(sql, RankItem.class);
 	}
 }

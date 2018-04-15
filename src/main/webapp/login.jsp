@@ -192,10 +192,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	{
 	 var name=$("#user_name").val();
 	 var pass=$("#password").val();
-	 
 	 $.ajax({
 	 	url:"user/login",
-	 	data:{username:name,password:password},
+	 	data:{username:name,passwold:password},
 	 	async:false,method:"post",
 	 	success:function(data){
 	 	

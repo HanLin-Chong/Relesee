@@ -5,74 +5,136 @@ import java.util.Date;
 
 public class RankItem {
 	private String ranklinesid;
-	private String managersid;
-	private	String usernumber;
-	private String linesnumber;
+	private String customerid;
+	private String managerid;
+	private String lineNumber;
 	private String filesurl;
-	private String states;
-	private String isnewfiles;
+	private String state;
 	private String uploaddate;
-	private String managerstype;
+	private String isnewfiles;
+	private String customertype;
+	private String texts;
 	
-	public  RankItem(){
-		ranklinesid=this.generateRankId();
-	}
 	public String getRanklinesid() {
 		return ranklinesid;
 	}
+
+
+
 	public void setRanklinesid(String ranklinesid) {
 		this.ranklinesid = ranklinesid;
 	}
-	public String getManagersid() {
-		return managersid;
+
+
+
+	public String getCustomerid() {
+		return customerid;
 	}
-	public void setManagersid(String managersid) {
-		this.managersid = managersid;
+
+
+
+	public void setCustomerid(String customerid) {
+		this.customerid = customerid;
 	}
-	public String getUsernumber() {
-		return usernumber;
+
+
+
+	public String getManagerid() {
+		return managerid;
 	}
-	public void setUsernumber(String usernumber) {
-		this.usernumber = usernumber;
+
+
+
+	public void setManagerid(String managerid) {
+		this.managerid = managerid;
 	}
-	public String getLinesnumber() {
-		return linesnumber;
+
+
+
+	public String getLineNumber() {
+		return lineNumber;
 	}
-	public void setLinesnumber(String linesnumber) {
-		this.linesnumber = linesnumber;
+
+
+
+	public void setLineNumber(String lineNumber) {
+		this.lineNumber = lineNumber;
 	}
+
+
+
 	public String getFilesurl() {
 		return filesurl;
 	}
+
+
+
 	public void setFilesurl(String filesurl) {
 		this.filesurl = filesurl;
 	}
-	public String getStates() {
-		return states;
+
+
+
+	public String getState() {
+		return state;
 	}
-	public void setStates(String states) {
-		this.states = states;
+
+
+
+	public void setState(String state) {
+		this.state = state;
 	}
-	public String getIsnewfiles() {
-		return isnewfiles;
-	}
-	public void setIsnewfiles(String isnewfiles) {
-		this.isnewfiles = isnewfiles;
-	}
+
+
+
 	public String getUploaddate() {
 		return uploaddate;
 	}
+
+
+
 	public void setUploaddate(String uploaddate) {
 		this.uploaddate = uploaddate;
 	}
-	public String getManagerstype() {
-		return managerstype;
+
+
+
+	public String getIsnewfiles() {
+		return isnewfiles;
 	}
-	public void setManagerstype(String managerstype) {
-		this.managerstype = managerstype;
+
+
+
+	public void setIsnewfiles(String isnewfiles) {
+		this.isnewfiles = isnewfiles;
 	}
-	
-	
+
+
+
+	public String getCustomertype() {
+		return customertype;
+	}
+
+
+
+	public void setCustomertype(String customertype) {
+		this.customertype = customertype;
+	}
+
+
+
+	public String getTexts() {
+		return texts;
+	}
+
+
+
+	public void setTexts(String texts) {
+		this.texts = texts;
+	}
+
+
+
 	public String generateRankId(){
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");

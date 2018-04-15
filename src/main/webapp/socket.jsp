@@ -28,16 +28,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script>  
     var path = '<%=basePath%>';  
     path='localhost:8080/relesee/'
-    var userId = 'lys';  
+    var userId = '${user.getUserid()}';
     if(userId==-1){  
         window.location.href="<%=basePath%>";  
     }  
-    var jspCode = userId+"_AAA";  
     var websocket;  
     if ('WebSocket' in window) {  
-        websocket = new WebSocket("ws://" + path + "wsMy?jspCode=" + jspCode);  
+        websocket = new WebSocket("ws://" + path + "wsMy?jspCode=" +userId);  
     } else if ('MozWebSocket' in window) {  
-        websocket = new MozWebSocket("ws://" + path + "wsMy?jspCode=" + jspCode);  
+        websocket = new MozWebSocket("ws://" + path + "wsMy?jspCode=" + userId);  
     } else {  
         websocket = new SockJS("http://" + path + "wsMy/sockjs?jspCode=" + jspCode);  
     }  
@@ -51,6 +50,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         alert("WebSocket:收到一条消息"+data);  
     };  
     websocket.onerror = function(event) {  
+    
+    
+    
+    
         console.log("WebSocket:发生错误 ");  
         console.log(event);  
     };  
