@@ -176,7 +176,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    -->
 		    <form class="login-form" method="post" action="user/login">
 		      <input type="text" placeholder="账号" name="userid"/>
-		      <input type="password" placeholder="密码" name="passwold" />
+		      <input type="password" placeholder="密码" name="password" />
 		      <button id="login" type="submit">登录</button>
 		      <p class="message"> <a href="#" target="_blank"></a></p>
 		    </form>

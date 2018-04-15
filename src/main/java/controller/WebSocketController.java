@@ -17,7 +17,7 @@ import websocket.MyWebSocketHandler;
 @RequestMapping()
 public class WebSocketController {
 	private final org.apache.commons.logging.Log logger =LogFactory.getLog(WebSocketController.class);
-	 @Autowired private MyWebSocketHandler myWebSocketHandler;
+	@Autowired private MyWebSocketHandler myWebSocketHandler;
 	@RequestMapping("/test")
 	public void sendMessage(HttpServletResponse resp){
 		TextMessage message = new TextMessage("This is a test");
