@@ -4,36 +4,40 @@
 	   xmlns:p="http://www.springframework.org/schema/p"
 	   xmlns:mvc="http://www.springframework.org/schema/mvc"
 	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:websocket="http://www.springframework.org/schema/websocket"
 	   xmlns:context="http://www.springframework.org/schema/context"
 		xsi:schemaLocation="http://www.springframework.org/schema/beans
+		
 		http://www.springframework.org/schema/beans/spring-beans.xsd 
 		http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
 	    http://www.springframework.org/schema/context 
-		http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context/spring-context.xsd
+		 http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 		
 		<!-- 更具不同的配置文件类型，把配置文件分成不同的部分，便于后期的系统维护 -->
 		<import resource="spring-aop.xml"/>
 		<import resource="spring-domain.xml"/>
-		
-	<mvc:interceptors>
+	<!-- 
+		 <mvc:interceptors>
 	 	<mvc:interceptor>
-	 		<!-- 标识要拦截的路径 -->
 	 	   <mvc:mapping path="/**" />
 	 	   <mvc:mapping path="/**.jsp"/>
 	 	   <mvc:mapping path="/**/*.jsp"/>
-           <!-- 处理拦截的具体实现类 -->
            	<mvc:exclude-mapping path="/user/**"/>
-            <bean class="interceptor.AuthInterceptor"/> 
-            <!-- 一下表示的是不要拦截的路径 -->
+            <bean class="interceptor.AuthInterceptor"/>      
 	 	</mvc:interceptor>	
 	 </mvc:interceptors>
+	 -->
+
+
 		<!-- 配置spring的扫描机制-->
 	   <context:component-scan base-package="controller"></context:component-scan>
 	   <context:component-scan base-package="services"/>
 	   <context:component-scan base-package="dao.impl"/>
+	   <context:component-scan base-package="websocket"></context:component-scan>
 	   <!-- 为Controller中的ModelAndView中的路径添加前缀和后缀名  在Controller只需要写名字就可以
 	   	viewresolver 师视图解析器
 	    -->
@@ -57,8 +61,22 @@
 	 <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource"></property>
 	 </bean>
-	
+
 <!-- 开启aspect对spring的支持 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />  
 	<bean id="logAspect" class="aop.LoginServiceAspect"></bean>
+	<!-- -->
+	
+	<!--
+	 开启对WebSocket的支持 
+	<bean id="websocket" class="websocket.WebSocketEndPoint"></bean>
+	<websocket:handlers>
+		<websocket:mapping path="/websocket" handler="websocket"></websocket:mapping>
+		<websocket:handshake-interceptors>
+			<bean class="websocket.HandShakeInterceptor"></bean>
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
+		
+	  -->
+	
 </beans>
