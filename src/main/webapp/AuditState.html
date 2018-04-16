@@ -53,24 +53,27 @@
 	        $(document).ready(function () {
 				var AuditedQueue;
 				$.ajax({
-					url:"",
+					url:"ranklines/query_with_status",
 					data:{},//选择一次性加载，无需向后台传值
 					async:false,method:'post',
 					success:function(data){
-						AuditQueue=data;
+						
+						AuditQueue=eval(data);
+						console.log(AuditQueue);
 					}
 				});
 	        	dataTable = $("#dataTable").raytable({
 	            	//datasource: { data: [], keyfield: 'id' },
-	            	datasource:{data:myData},
+	            	datasource:{data:AuditQueue},
 	            	
 	            	columns: [
-	                    { title: "文件名", icons: [{ glyph: "glyphicon-info-sign", handler: iconAction, data:"id" }], renderIf: isManager },
-	                    { field: "firstName", title: "上传时间", sort:true },
-	                    { field: "lastName", title: "文件描述", sort: true },
-	                    { field: "title", title: "客户种类" },
-	                    { field: "grade", title: "审核状态", sort: true },
-	                    { field: "ssn", title: "SSN" ,format:operationPrior  },
+	                    //{ title: "文件名", icons: [{ glyph: "glyphicon-info-sign", handler: iconAction, data:"id" }], renderIf: isManager },
+	                    { field: "customerid", title: "客户ID", sort:false },
+	                    { field: "customertype", title: "客户性质", sort: false },
+	                    { field: "filesurl", title: "文件路径" },
+	                    { field: "isnewfiles", title: "是否下载过", format:Downloaded },
+	                    { field: "state", title: "文件状态"   },
+	                    { field: "uploaddate", title: "上传时间"   },
 	                    //{ field: "birthDate", title: "DOB", sort: true, format: parseDate },
 	                    { 
 	                    	title: "申请优先", 
@@ -79,6 +82,15 @@
 	                    		{ glyph: "glyphicon-circle-arrow-up", format:operationPrior ,handler: iconAction, data: "id" }
 	                    	],
 	                    	width:20 
+	                    },
+	                    { 
+	                    	title: "撤销审核", 
+	                    	icons: [
+	                    		
+	                    		{ glyph: "glyphicon-trash", format:operationPrior ,handler: iconAction, data: "id" }
+	                    	],
+	                    	width:20,
+	                    	renderIf:isAbleForDelete 
 	                    }
 	                ],
 	            	pagesize: 15,
@@ -94,8 +106,22 @@
 	                                 
 	        });
 			
-			// load some data
-
+			function Downloaded(data){
+				if(data.isnewfiles==0){
+					return "新文件";
+				}
+				if(data.isnewfiles==1){
+					return "文件已被下载过";
+				}
+			}
+			function isAbleForDelete(data){
+				if(data.isnewfiles=="0"){
+					return true;
+				}
+				if(data.isnewfiles=="1"){
+					return false;
+				}
+			}
 
 			// icon clicked event handler
 	        function iconAction(event)
@@ -130,7 +156,7 @@
 	    		//return d.toDateString();
 	    	//}
 	    	function operationPrior(item){
-	    		console.log(item);
+	    		//console.log(item);
 	    		return "t"+item.grade;
 	    	}
 
