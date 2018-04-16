@@ -1,9 +1,13 @@
 Manifest-Version: 1.0
 <<<<<<< HEAD
+<<<<<<< HEAD
 Built-By: alienware
 =======
 Built-By: jinfeng
 >>>>>>> 8b16cecc0cc0f72d4e74a17d19b5cb25e9ab9355
+=======
+Built-By: alienware
+>>>>>>> 6997a076785400cac6a200197d93c4568fcab970
 Build-Jdk: 1.8.0_66
 Created-By: Maven Integration for Eclipse
 

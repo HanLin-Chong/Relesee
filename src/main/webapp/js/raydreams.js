@@ -163,7 +163,7 @@
 
 		// add a column to hold row numbers
 		if (base.rowNumbers) {
-			options.columns.unshift({ field: "rowNum", title: "Row" });
+			options.columns.unshift({ field: "rowNum", title: "序号" });//here 修改序号
 		}
 
 		// render header

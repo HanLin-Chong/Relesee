@@ -25,7 +25,7 @@ public class RankLinesService {
 	public List<RankItem> getRankItems(String status){
 		if("".equals(status) || status==null) status = "排队待审核";
 		this.rankItemDao.setJdbcTemplate(jdbcTemplate);
-		String sql = "select * from ranklines where states="+"'"+status+"'";
+		String sql = "select * from ranklines where state="+"'"+status+"'";
 		return this.rankItemDao.find(sql, RankItem.class);
 	}
 	
