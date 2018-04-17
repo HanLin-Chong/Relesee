@@ -21,4 +21,8 @@ public interface RankItemDao {
 	public boolean update(String column,Object[] obj);
 	
 	public List<RankItem> findWidthStatus(String status);
+	
+	public boolean deleteItem(String ranklineid);
+	
+	public RankItem findById(String ranklineid);
 }

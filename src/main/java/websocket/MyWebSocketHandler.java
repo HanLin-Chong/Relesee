@@ -32,7 +32,7 @@ public class MyWebSocketHandler implements WebSocketHandler{
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		String userid =(String)session.getHandshakeAttributes().get("jspCode");
+		String userid =(String)session.getAttributes().get("jspCode");
 		/*
 		 * 当用户登录时时，将用户的id与session记录下来，用作之后的通信
 		 */
