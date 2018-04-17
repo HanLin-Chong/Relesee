@@ -3,8 +3,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-
-    
+  	<!-- !!!!!!!!!!!!!!!!!!!!!!!!   特别注意    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+	<!-- 
+		   子页面禁止引用其它任何位置，任何形式的jquery文件（包括联网引用的也不行）,
+		   否则父页面bootstrap会失效报错，只能引用本地的js/jquery-1.11.0.min.js 
+	-->
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!   /特别注意  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <title>index</title>
     <meta charset="utf-8">
 
@@ -80,7 +84,7 @@
           <div class="sidebar-search">
               <div>                   
                   <div class="input-group">                          
-                      <input type="text" class="form-control search-menu" placeholder="在这里搜索">
+                      <input type="text" class="form-control search-menu" placeholder="搜索功能暂未开放">
                       <span class="input-group-addon"><i class="fa fa-search"></i></span>
                   </div>
               </div>                    
@@ -95,31 +99,31 @@
                           <ul>
                               <li class="pageloder-trigger" whichpage="fileupload.html"><a href="#">上传资料 <span class="label label-success">10</span></a> </li>
                               
-                              <li class="pageloder-trigger" whichpage="AuditState.html"]><a href="#">查看审核状态</a></li>
+                              <li class="pageloder-trigger" whichpage="AuditState.html"><a href="#">查看审核状态</a></li>
                               
                           </ul>
                       </div>
                   </li>                  
                   
                   
-                  <!--  <li class="header-menu"><span>Simple menu</span></li>-->
+                  <!--  <li class="header-menu"><span>Simple menu</span></li>
                   <li><a href="#"><i class="fa fa-tv"></i><span>用户权限管理</span></a></li>                   
                   <li><a href="#"><i class="fa fa-photo"></i><span>已上传资料</span></a></li>
-                  
+                  -->
 
               </ul>
              </div><!-- sidebar-menu  -->           
           </div><!-- sidebar-content  -->
    
           <div class="sidebar-footer">
-              <a href="#"><i class="fa fa-bell"></i><span class="label label-warning notification">3</span></a>
-              <a href="#"><i class="fa fa-envelope"></i><span class="label label-success notification">7</span></a>
-              <a href="#"><i class="fa fa-gear"></i></a>
-              <a href="#"><i class="fa fa-power-off"></i></a>
+              <a id="notifications-trigger" title="消息" ><i class="fa fa-bell"></i><span class="label label-warning notification">3</span></a>
+              <a class="pageloder-trigger" whichpage="AuditState.html" title="操作日志"><i class="glyphicon glyphicon-list-alt"></i><span class="label label-success notification">7</span></a>
+              
+              <a title="退出当前账号"><i class="fa fa-power-off"></i></a>
           </div>
       </nav><!-- sidebar-wrapper  -->
       <main class="page-content">
-      <!-- body -->
+      
 
           	<center>
 	          	<!--<a href="#" class="trigger-success">Success</a>
@@ -130,28 +134,95 @@
 				<li><a href="#" class="trigger-custom1">Custom I</a></li>
 				<li><a href="#" class="trigger-custom2">Custom II</a></li>
 				<li class="trigger-success"></li>-->
-				<button id="trigger">触发Toast</button>
+				<button id="trigger" data-toggle="tooltip" data-placement="bottom" title="haha">触发Toast</button>
+
+			
 			</center>
-      <!-- /body -->
+      
       </main><!-- page-content" -->
   </div><!-- page-wrapper -->  
+  
+  
+  <!-- Button trigger modal -->
+
+
+<!-- 消息模态框 -->
+	<div class="modal fade bs-example-modal-lg" id="notifications-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">消息</h4>
+	      	</div>
+	      	<div class="modal-body">
+	      		<ul class="list-group">
+			  	<a class="list-group-item">消息标题---正文取前几个字+“。。。”---产生时间</a>
+			 	 <a class="list-group-item">消息2</a>
+			 	 <a class="list-group-item">消息3</a>
+			  	<a class="list-group-item">消息4</a>
+			  	<a class="list-group-item">消息5</a>
+				</ul>
+	      	</div>
+	      	
+	      	<div class="modal-footer">
+	      		
+				  <ul class="pagination" style="margin:15px 0px;padding:0px;float:left">
+				    <li>
+				      <a  aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    <li><a href="#">1</a></li>
+				    <li><a href="#">2</a></li>
+				    <li><a href="#">3</a></li>
+				    <li><a href="#">4</a></li>
+				    <li><a href="#">5</a></li>
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				  
+				
+				<div>
+	        	  <button style="margin:20px 0px;" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	        	  <button style="margin:20px 0px;" type="button" class="btn btn-primary">全部标为已读</button>
+	        	</div>
+	      	</div>
+	    </div>
+	  </div>
+	</div>
+  
+  
+  
   <script>
   //自定义class：.pageloder-trigger 所有点击需要切换页面的html元素，需要有“whichpage=""”属相
   	$(document).ready(function(){
   		
+  		//所有pageloder-trigger类，只要添加whichpage属性就可实现加载该页面
   		$(".pageloder-trigger").click(function(e){
   			var url=e.currentTarget.getAttribute("whichpage");
   			console.log(url);
   			$(".page-content").load(url);
   		});
+  		
+  		//点初始界面上的按钮弹出toast，到时候记得删掉
 		$("#trigger").click(function(){
 			iziToast.show({
-			    title: 'Hello World!',
-			    message: 'I am a basic toast message!',
+			    title: '你好',
+			    message: '这是测试toast',
 			    color:'blue',
 			    layout:1
 			});
 		});
+		
+		$("#notifications-trigger").click(function(e){
+			
+			$("#notifications-modal").modal('show');//or hide
+		});
+		
+		//默认500mm=0.5秒后跳出左侧栏
 		setTimeout(function(){
 			$(".page-wrapper").toggleClass("toggled");
 		},500)
