@@ -27,7 +27,7 @@ public class RankLinesController {
 	@Autowired
 	private RankLinesService rankLinesService;
 	/*
-	 *  更具队列项目的订单状态查询队列，
+	 *  根据队列项目的订单状态查询队列，
 	 */
 	@RequestMapping("/query_with_status")
 	public void findRankLinesWithStatuts(String status,HttpServletRequest req,HttpServletResponse resp){
@@ -79,7 +79,7 @@ public class RankLinesController {
 	}
 	
 	/*
-	 * 根据据的在正在排队审核的id删除该项目
+	 * 根据的在正在排队审核的id删除该项目
 	 */
 	@RequestMapping("delete_item")
 	public void deleteItem(HttpServletRequest req, HttpServletResponse resp) throws IOException{
@@ -91,9 +91,9 @@ public class RankLinesController {
 		// 若不存即返回消息，数据库中不存在该条数据
 		if(this.rankLinesService.findById(ranklineid)!=null){
 			if(this.rankLinesService.deleteItem(ranklineid)){
-				info = ToastUtil.getToast("错误", "删除成功","green");
+				info = ToastUtil.getToast("成功", "删除成功","green");
 			}else{
-				info = ToastUtil.getToast("", "删除失败", "red");
+				info = ToastUtil.getToast("失败", "删除失败", "red");
 			}
 		}else{
 			info = ToastUtil.getToast("错误", "不存在当前值","red");
