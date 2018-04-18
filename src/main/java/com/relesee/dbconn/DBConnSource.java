@@ -1,4 +1,4 @@
-package dbconn;
+package com.relesee.dbconn;
 
 public class DBConnSource {
 

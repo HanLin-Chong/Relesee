@@ -1,4 +1,4 @@
-package aop;
+package com.relesee.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -8,9 +8,9 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import bean.User;
-import domain.UserLoginLog;
-import services.LoginServiceImpl;
+import com.relesee.bean.User;
+import com.relesee.domain.UserLoginLog;
+import com.relesee.services.LoginServiceImpl;
 /**
  * 
  * @author JinFeng
@@ -21,7 +21,7 @@ public class LoginServiceAspect {
 	UserLoginLog loginLog  = new UserLoginLog();
 	@Autowired
 	
-	@Pointcut("execution(* services.LoginServiceImpl.login(..))")
+	@Pointcut("execution(* com.relesee.services.LoginServiceImpl.login(..))")
 	public void login(){
 		
 	}

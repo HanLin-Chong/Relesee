@@ -1,4 +1,4 @@
-package domain;
+package com.relesee.domain;
 
 import java.util.List;
 

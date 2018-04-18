@@ -1,4 +1,4 @@
-package controller;
+package com.relesee.controller;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.TextMessage;
 
-import websocket.MyWebSocketHandler;
+import com.relesee.websocket.MyWebSocketHandler;
 
 @Controller
 @RequestMapping()

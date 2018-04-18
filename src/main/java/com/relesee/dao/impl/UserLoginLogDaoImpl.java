@@ -1,11 +1,11 @@
-package dao.impl;
+package com.relesee.dao.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import bean.User;
-import dao.UserLoginLogDao;
-import domain.UserLoginLog;
+import com.relesee.bean.User;
+import com.relesee.dao.UserLoginLogDao;
+import com.relesee.domain.UserLoginLog;
 
 /*
  * 

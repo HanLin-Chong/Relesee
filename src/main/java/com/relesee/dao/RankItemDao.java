@@ -1,8 +1,8 @@
-package dao;
+package com.relesee.dao;
 
 import java.util.List;
 
-import bean.RankItem;
+import com.relesee.bean.RankItem;
 
 public interface RankItemDao {
 	public boolean insertRankitem(RankItem rankItem);

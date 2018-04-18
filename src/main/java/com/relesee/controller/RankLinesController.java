@@ -1,4 +1,4 @@
-package controller;
+package com.relesee.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,12 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import bean.RankItem;
-import bean.User;
+import com.relesee.bean.RankItem;
+import com.relesee.bean.User;
+import com.relesee.services.RankLinesService;
+import com.relesee.util.DateUtil;
+import com.relesee.util.ToastUtil;
+
 import net.sf.json.JSONArray;
-import services.RankLinesService;
-import util.DateUtil;
-import util.ToastUtil;
 
 @Controller
 @RequestMapping("/ranklines")

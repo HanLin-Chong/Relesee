@@ -1,4 +1,4 @@
-package util;
+package com.relesee.util;
 
 import java.util.Collection;
 import java.util.Map;

@@ -1,8 +1,8 @@
-package dao;
+package com.relesee.dao;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import domain.UserLoginLog;
+import com.relesee.domain.UserLoginLog;
 
 public interface UserLoginLogDao{
 	public boolean createLog(UserLoginLog userLoginLog);

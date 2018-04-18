@@ -1,4 +1,4 @@
-package websocket;
+package com.relesee.websocket;
 
 import java.util.Map;
 

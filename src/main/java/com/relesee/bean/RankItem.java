@@ -1,4 +1,4 @@
-package bean;
+package com.relesee.bean;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package services;
+package com.relesee.services;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import bean.RankItem;
-import dao.impl.RankItemDaoImpl;
+import com.relesee.bean.RankItem;
+import com.relesee.dao.impl.RankItemDaoImpl;
 
 @Service("rankLinesService")
 public class RankLinesService {

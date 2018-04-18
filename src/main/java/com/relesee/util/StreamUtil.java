@@ -1,4 +1,4 @@
-package util;
+package com.relesee.util;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

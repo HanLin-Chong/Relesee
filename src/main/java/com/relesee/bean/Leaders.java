@@ -1,4 +1,4 @@
-package bean;
+package com.relesee.bean;
 
 public class Leaders {
 	private String leaderid;
