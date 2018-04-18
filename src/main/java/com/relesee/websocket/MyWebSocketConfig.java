@@ -1,4 +1,4 @@
-package websocket;
+package com.relesee.websocket;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Component;

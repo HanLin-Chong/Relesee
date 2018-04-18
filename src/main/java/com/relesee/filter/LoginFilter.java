@@ -1,4 +1,4 @@
-package filter;
+package com.relesee.filter;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.User;
+import com.relesee.bean.User;
 
 public class LoginFilter implements Filter{
 

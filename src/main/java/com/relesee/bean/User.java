@@ -1,4 +1,4 @@
-package bean;
+package com.relesee.bean;
 
 import java.io.Serializable;
 

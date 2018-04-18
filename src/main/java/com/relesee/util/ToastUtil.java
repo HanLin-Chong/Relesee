@@ -1,4 +1,4 @@
-package util;
+package com.relesee.util;
 
 public class ToastUtil {
 	static StringBuffer info;

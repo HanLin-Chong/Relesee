@@ -1,4 +1,4 @@
-package interceptor;
+package com.relesee.interceptor;
 
 import java.io.PrintWriter;
 import java.util.Set;
@@ -12,7 +12,8 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import annotation.Auth;
+
+import com.relesee.annotation.Auth;
 /**
  * 
  * @author JinFeng

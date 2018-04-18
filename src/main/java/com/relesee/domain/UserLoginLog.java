@@ -1,4 +1,4 @@
-package domain;
+package com.relesee.domain;
 
 import java.io.Serializable;
 import java.util.Date;

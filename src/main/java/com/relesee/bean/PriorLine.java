@@ -1,4 +1,4 @@
-package bean;
+package com.relesee.bean;
 
 public class PriorLine {
 	private String priorlineid;

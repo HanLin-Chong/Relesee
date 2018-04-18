@@ -1,14 +1,14 @@
-package services;
+package com.relesee.services;
 
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bean.User;
-import dao.UserDao;
-import dao.UserLoginLogDao;
-import dao.impl.UserDaoImpl;
+import com.relesee.bean.User;
+import com.relesee.dao.UserDao;
+import com.relesee.dao.UserLoginLogDao;
+import com.relesee.dao.impl.UserDaoImpl;
 
 /**
  * 

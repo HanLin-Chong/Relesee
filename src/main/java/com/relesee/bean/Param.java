@@ -1,16 +1,13 @@
-package bean;
+package com.relesee.bean;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import util.CastUtil;
-import util.CollectionUtil;
-import util.StringUtil;
-/*
- * 请求参数的对象
- */
+import com.relesee.util.CastUtil;
+import com.relesee.util.CollectionUtil;
+import com.relesee.util.StringUtil;
 
 public class Param {
 	private List<FormParam> formParamList;

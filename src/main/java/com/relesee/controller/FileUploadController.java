@@ -1,20 +1,11 @@
-package controller;
+package com.relesee.controller;
 
 import java.io.File;
-
-
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import bean.FileDomain;
-import bean.RankItem;
-import bean.User;
-import domain.MultiFileDomain;
-import services.RankLinesService;
-import util.DateUtil;
+import com.relesee.bean.FileDomain;
+import com.relesee.bean.RankItem;
+import com.relesee.bean.User;
+import com.relesee.domain.MultiFileDomain;
+import com.relesee.services.RankLinesService;
+import com.relesee.util.DateUtil;
 
 /**
  * 
@@ -92,7 +83,7 @@ public class FileUploadController {
 		for(int i=0;i<files.size();i++){
 			MultipartFile  file = files.get(i);
 			String filename = file.getOriginalFilename();
-			if(filesurl==null){
+			if(filesurl==null || filesurl.toString().equals("")){
 				filesurl.append(filename);
 			}else{
 				filesurl.append(";"+filename);
@@ -133,5 +124,4 @@ public class FileUploadController {
 		item.setCustomertype(req.getParameter("customertype"));
 		return item;
 	}
-	
 }

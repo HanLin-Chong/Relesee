@@ -1,4 +1,4 @@
-package dao.impl;
+package com.relesee.dao.impl;
 
 
 import java.util.ArrayList;
@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import bean.RankItem;
-import dao.RankItemDao;
+import com.relesee.bean.RankItem;
+import com.relesee.dao.RankItemDao;
 @Repository("rankItemDao")
 public class RankItemDaoImpl  extends BaseDaoImpl implements RankItemDao{
 	@Override
@@ -59,7 +59,7 @@ public class RankItemDaoImpl  extends BaseDaoImpl implements RankItemDao{
 	
 	/**
 	 * (non-Javadoc)
-	 * @see dao.RankItemDao#upldate(java.lang.String, java.lang.Object[])
+	 * @see com.relesee.dao.RankItemDao#upldate(java.lang.String, java.lang.Object[])
 	 * @return 若执行更新成功则放回true
 	 * @param column 需要更新的列，obj数据包括两个部分，第一位所要更新的新值，第二个id所要更新列的id值
 	 */

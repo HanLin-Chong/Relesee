@@ -1,4 +1,4 @@
-package websocket;
+package com.relesee.websocket;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
-import bean.User;
+import com.relesee.bean.User;
 
 @Component
 public class MyWebSocketHandler implements WebSocketHandler{

@@ -1,8 +1,8 @@
-package dao.impl;
+package com.relesee.dao.impl;
 
 import java.util.List;
 
-import bean.PriorLine;
+import com.relesee.bean.PriorLine;
 
 /**
  * 
