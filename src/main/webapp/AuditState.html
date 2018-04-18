@@ -38,7 +38,24 @@
 	            
 		</div>
 	</div>
-
+	
+	<div id="confirmDeleteModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	  <div class="modal-dialog modal-sm" role="document">
+	    <div class="modal-content">
+	      	<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">确认撤销？</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p id="revokeObject">One fine body&hellip;</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		        <button id="confirmDelete" type="button" class="btn btn-danger">确定</button>
+		      </div>
+	    </div>
+	  </div>
+	</div>
 	
 	<script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
 	
@@ -49,7 +66,7 @@
 
 		// the data table itself
 	        var dataTable = null;
-
+			var currentRow = null;
 	        $(document).ready(function () {
 				var AuditedQueue;
 				$.ajax({
@@ -60,6 +77,7 @@
 						
 						AuditQueue=eval(data);
 						console.log(AuditQueue);
+						//console.log(AuditQueue);
 					}
 				});
 	        	dataTable = $("#dataTable").raytable({
@@ -87,7 +105,7 @@
 	                    	title: "撤销审核", 
 	                    	icons: [
 	                    		
-	                    		{ glyph: "glyphicon-trash", format:operationPrior ,handler: iconAction, data: "id" }
+	                    		{ glyph: "glyphicon-trash" ,handler: revokeFile, data: "id" }
 	                    	],
 	                    	width:20,
 	                    	renderIf:isAbleForDelete 
@@ -103,8 +121,27 @@
 	            
 	            // load some default
 	            //doLoad(jQuery("#dataTable"));
-	                                 
-	        });
+	            $("#confirmDelete").click(function(){
+	            	//alert(currentRow.ranklineid);
+	            	$.ajax({
+	            		url:"ranklines/delete_item",
+	            		data:{ranklineid:currentRow.ranklineid},
+	            		async:false,method:'post',
+	            		success:function(response){
+	            			response=eval(response);
+	            			
+	            			iziToast.show({
+							    title: response[0].title,
+							    message: response[0].message,
+							    color:response[0].color,// blue, red, green, yellow
+							    layout:1
+							});
+							$('#confirmDeleteModal').modal('hide');
+	            		}
+	            	});
+	            	//console.log(dataTable.datasource.data[1]);
+	            });                     
+	        });//document ready
 			
 			function Downloaded(data){
 				if(data.isnewfiles==0){
@@ -122,6 +159,20 @@
 					return false;
 				}
 			}
+			function revokeFile(event){
+				//console.log(event);
+				var data = jQuery(event.currentTarget).data('ray-data');
+				
+				var rowindex = event.data.rowIdx;
+				var rowdata = dataTable.datasource.data[rowindex];
+				currentRow = rowdata;
+				//console.log(rowdata);
+				$("#revokeObject").html("是否撤销客户"+rowdata.customerid+"于<br/>"+rowdata.uploaddate+"上传的<br/>"+rowdata.filesurl+"?");
+				$('#confirmDeleteModal').modal('show');
+			}
+			
+			
+			
 
 			// icon clicked event handler
 	        function iconAction(event)
