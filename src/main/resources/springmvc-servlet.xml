@@ -7,7 +7,6 @@
 	   xmlns:websocket="http://www.springframework.org/schema/websocket"
 	   xmlns:context="http://www.springframework.org/schema/context"
 		xsi:schemaLocation="http://www.springframework.org/schema/beans
-		
 		http://www.springframework.org/schema/beans/spring-beans.xsd 
 		http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
@@ -34,10 +33,10 @@
 
 
 		<!-- 配置spring的扫描机制-->
-	   <context:component-scan base-package="controller"></context:component-scan>
-	   <context:component-scan base-package="services"/>
-	   <context:component-scan base-package="dao.impl"/>
-	   <context:component-scan base-package="websocket"></context:component-scan>
+	   <context:component-scan base-package="com.relesee.controller"></context:component-scan>
+	   <context:component-scan base-package="com.relesee.services"/>
+	   <context:component-scan base-package="com.relesee.dao.impl"/>
+	   <context:component-scan base-package="com.relesee.websocket"></context:component-scan>
 	   <!-- 为Controller中的ModelAndView中的路径添加前缀和后缀名  在Controller只需要写名字就可以
 	   	viewresolver 师视图解析器
 	    -->
@@ -64,7 +63,7 @@
 
 <!-- 开启aspect对spring的支持 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />  
-	<bean id="logAspect" class="aop.LoginServiceAspect"></bean>
+	<bean id="logAspect" class="com.relesee.aop.LoginServiceAspect"></bean>
 	<!-- -->
 	
 	<!--
