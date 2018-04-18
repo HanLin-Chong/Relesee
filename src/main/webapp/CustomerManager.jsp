@@ -8,7 +8,7 @@
 		   子页面禁止引用其它任何位置，任何形式的jquery文件（包括联网引用的也不行）,
 		   否则父页面bootstrap会失效报错，只能引用本地的js/jquery-1.11.0.min.js 
 	-->
-    <!-- !!!!!!!!!!!!!!!!!!!!!!!!   /特别注意    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!   /特别注意  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <title>index</title>
     <meta charset="utf-8">
 
@@ -28,7 +28,7 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css" />
 	<link rel="stylesheet" href="css/custom.css">

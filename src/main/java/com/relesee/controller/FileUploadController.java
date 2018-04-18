@@ -79,7 +79,7 @@ public class FileUploadController {
 		}
 	}
 	@RequestMapping("ajax/multifile")
-	public void multifileupload(MultiFileDomain multiFileDoamin, HttpServletRequest request,HttpServletResponse response){
+	public void multifileupload(MultiFileDomain multiFileDoamin, HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String realPath = request.getServletContext().getRealPath("uploadfiles");
 		File targetDir = new File(realPath);
 		String description = request.getParameter("description");
@@ -110,16 +110,14 @@ public class FileUploadController {
 		 *   获取当前的项目，并保存到数据库当中
 		 */
 		RankItem item = this.getRankLinesItem(request.getSession(), request, filesurl.toString());
-		rankLinesService.addNewRankLinesItem(item);
 		StringBuffer buff1 = new StringBuffer("[");
-		buff1.append("{\"title\":"+"\"文件上传\",");
-		buff1.append("\"message\":"+"\"文件上传成功\"}]");
-		System.out.println(buff1.toString());
-		try {
-			response.getWriter().write(buff1.toString());
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(rankLinesService.addNewRankLinesItem(item)){
+			buff1.append("{\"title\":"+"\"文件上传\",");
+			buff1.append("\"message\":"+"\"文件上传成功\"}]");
+			System.out.println(buff1.toString());
 		}
+	
+			response.getWriter().write(buff1.toString());
 	}
 	
 	/*
@@ -128,6 +126,7 @@ public class FileUploadController {
 	public RankItem getRankLinesItem(HttpSession session, HttpServletRequest req, String filesurl){
 		RankItem item = new RankItem();
 		User user = (User)session.getAttribute("user");
+		item.setRanklineid(item.generateRankId());
 		item.setManagerid(user.getUserid());
 		item.setFilesurl(filesurl);
 		item.setUploaddate(DateUtil.getTime());

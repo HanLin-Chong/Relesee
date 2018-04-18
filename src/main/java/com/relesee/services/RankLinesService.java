@@ -56,4 +56,13 @@ public class RankLinesService {
 	public boolean addNewRankLinesItem(RankItem rankItem){
 		return rankItemDao.insertRankitem(rankItem);
 	}
+	
+	public boolean deleteItem(String ranklineid){
+		 return rankItemDao.deleteItem(ranklineid);
+	}
+	
+	public RankItem findById(String ranklineid){
+		return rankItemDao.findById(ranklineid);
+	}
+
 }
