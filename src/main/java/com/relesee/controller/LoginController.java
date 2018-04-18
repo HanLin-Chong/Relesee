@@ -1,4 +1,4 @@
-package controller;
+package com.relesee.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -9,9 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import bean.User;
-import services.LoginService;
-import services.LoginServiceImpl;
+import com.relesee.bean.User;
+import com.relesee.services.LoginService;
+import com.relesee.services.LoginServiceImpl;
 
 @Controller
 @RequestMapping("/user")

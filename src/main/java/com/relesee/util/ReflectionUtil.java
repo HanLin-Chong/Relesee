@@ -1,4 +1,4 @@
-package util;
+package com.relesee.util;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

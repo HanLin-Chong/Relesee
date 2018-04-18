@@ -1,4 +1,4 @@
-package dao.impl;
+package com.relesee.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -11,7 +11,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.*;
 import org.springframework.stereotype.Repository;
-import dbconn.JDBCUtil;
+
+import com.relesee.dbconn.JDBCUtil;
 
 /**
  * 

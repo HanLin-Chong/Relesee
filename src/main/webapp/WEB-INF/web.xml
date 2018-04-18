@@ -87,7 +87,7 @@
 
 	<filter>
 		<filter-name>LoginFilter</filter-name>
-  		<filter-class>filter.LoginFilter</filter-class>
+  		<filter-class>com.relesee.filter.LoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
   		<filter-name>LoginFilter</filter-name>
