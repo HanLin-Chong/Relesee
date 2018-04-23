@@ -26,6 +26,10 @@ public class RankLinesController {
 	
 	@Autowired
 	private RankLinesService rankLinesService;
+	private final String error = "错误";
+	private final String errorColor = "red";
+	private final String success = "操作成功";
+	private final String successColor = "green";
 	/*
 	 *  更具队列项目的订单状态查询队列，
 	 */
@@ -34,6 +38,8 @@ public class RankLinesController {
 		resp.setHeader("Content-type", "text/html;charset=UTF-8");  
 		List<RankItem> mList = new ArrayList<RankItem>();
 		mList = rankLinesService.getRankItems(status);
+		
+		//将List中y
 		JSONArray json = JSONArray.fromObject(mList);
 		try {
 			System.out.println(json.toString());
@@ -52,25 +58,23 @@ public class RankLinesController {
 		String status = req.getParameter("status");
 		resp.setHeader("content-type", "text/html;charset=UTF-8");
 		String ranklinesid = req.getParameter("ranklinesid");
-		StringBuffer info;
+		String info;
 		boolean flag;
 		flag=rankLinesService.updateStatusById(status, ranklinesid);
 		if(flag){
-			    info = new StringBuffer("[");
-				info.append("{\"title\":"+"\"查找\",");
-				info.append("\"message\":"+"\"查找成功\"}]");
+				info = this.getSuccessToastMessage("查找成功");
 			//修改成功
 		}else{
 			// 查找失败
-				info = new StringBuffer("[");
-				info.append("{\"title\":"+"\"查找\",");
-				info.append("\"message\":"+"\"查找失败\"}");
-				info.append("\"color\":"+"\"+red\"}]");
+			info = this.getErrorToastMessage("查找失败");
 		}	
-		resp.getWriter().write(info.toString());
+		resp.getWriter().write(info);
 	}
-	
-	@RequestMapping("add_new_item")
+	@RequestMapping("/find_with_id")
+	public void findById(HttpServletRequest req, HttpServletResponse resp){
+		
+	}
+	@RequestMapping("/add_new_item")
 	public void addRankLinesItem(HttpServletRequest req, HttpServletResponse resp){
 		HttpSession session=req.getSession();
 		User user =(User) session.getAttribute("user");
@@ -81,7 +85,7 @@ public class RankLinesController {
 	/*
 	 * 根据据的在正在排队审核的id删除该项目
 	 */
-	@RequestMapping("delete_item")
+	@RequestMapping("/delete_item")
 	public void deleteItem(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		String ranklineid = req.getParameter("ranklineid");
 		System.out.println(ranklineid);
@@ -91,13 +95,19 @@ public class RankLinesController {
 		// 若不存即返回消息，数据库中不存在该条数据
 		if(this.rankLinesService.findById(ranklineid)!=null){
 			if(this.rankLinesService.deleteItem(ranklineid)){
-				info = ToastUtil.getToast("错误", "删除成功","green");
+				info = getSuccessToastMessage("删除成功");
 			}else{
-				info = ToastUtil.getToast("", "删除失败", "red");
+				info = this.getErrorToastMessage("删除失败");
 			}
 		}else{
-			info = ToastUtil.getToast("错误", "不存在当前值","red");
+			info = this.getErrorToastMessage("不存在当前值");
 		}
 		resp.getWriter().write(info);
+	}
+	private String getErrorToastMessage(String message){
+		return ToastUtil.getToast(error, message, errorColor);
+	}
+	private String getSuccessToastMessage(String message){
+		return ToastUtil.getToast(success, message, successColor);
 	}
 }

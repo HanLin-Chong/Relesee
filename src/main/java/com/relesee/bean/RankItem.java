@@ -4,10 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RankItem {
+	
+	private static String BASE_URL="localhost:8080/relesee/";
+	
 	private String ranklineid;
 	private String customerid;
 	private String managerid;
 	private String lineNumber;
+	private String downloadurl;
 	private String filesurl;
 	private String state;
 	private String uploaddate;
@@ -17,6 +21,9 @@ public class RankItem {
 	
 
 
+	public String getDownloadurl(){
+		return BASE_URL+filesurl;
+	}	
 	public String getRanklineid() {
 		return ranklineid;
 	}
@@ -78,7 +85,6 @@ public class RankItem {
 	public String getState() {
 		return state;
 	}
-
 
 
 	public void setState(String state) {
