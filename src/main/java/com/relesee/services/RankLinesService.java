@@ -29,6 +29,17 @@ public class RankLinesService {
 		return this.rankItemDao.find(sql, RankItem.class);
 	}
 	
+	public List<RankItem> getRankItemByManagerId(String managerid, String status){
+		String sql;
+		sql = "select * from ranklines where managerid = "+"'"+managerid+"'";
+		if(status == null && status.equals("")){
+			return this.rankItemDao.find(sql, RankItem.class);
+		}else{
+			sql+=" and state="+"'"+status+"'";
+			return this.rankItemDao.find(sql, RankItem.class);
+		}
+	}
+	
 	/*
 	 * 修改审核项目的是否为最新的状态，
 	 * @param 0为最新文件，1表示该文件已被审核或被下载
