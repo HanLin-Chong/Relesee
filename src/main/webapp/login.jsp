@@ -203,8 +203,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 if(name=="test" && pass=="test")//è¿éæ¹æä»åå°ä¼ æ¥çbooleanå¼
 	 {
 	  //alert("ç»å½æåï¼");
-	  $("#user_name").val("");
-	  $("#password").val("");
+	  $("#user_name").val();
+	  $("#password").val();
 
 	 }
 	 else
