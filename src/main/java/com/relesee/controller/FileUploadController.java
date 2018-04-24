@@ -20,6 +20,7 @@ import com.relesee.domain.MultiFileDomain;
 import com.relesee.services.RankLinesService;
 import com.relesee.util.DateUtil;
 
+
 /**
  * 
  * @author JinFeng
@@ -41,12 +42,10 @@ public class FileUploadController {
 		response.setContentType("application/json;charset=UTF-8");
 		MultipartFile file = fileDomain.getFile();
 		String realPath = request.getServletContext().getRealPath("uploadfiles");
-		
 		logger.debug("文件已上传成功--文件描述为"+fileDomain.getDescription());
 		/*
 		 * 获取文件自己本身文件名
 		 */
-		System.out.println("文件描述"+fileDomain.getDescription());
 		String fileName = file.getOriginalFilename();
 		File targetFile = new File(realPath,fileName);
 		if(!targetFile.exists()){
