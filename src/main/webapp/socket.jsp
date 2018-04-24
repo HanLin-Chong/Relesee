@@ -19,14 +19,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<script  src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
   </head>
   
   <body>
     This is my JSP page. <br>
   </body>
   <script>  
-    var path = '<%=basePath%>';  
+    var path = '<%=basePath%>'; 
+     
     path='localhost:8080/relesee/'
     var userId = '${user.getUserid()}';
     if(userId==-1){  
@@ -61,6 +62,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         console.log("WebSocket:已关闭");  
         console.log(event);  
     }  
+    $(document).ready(function(){
+    	alert("<%=basePath %>");
+    });
+    
 </script>  
   
 </html>

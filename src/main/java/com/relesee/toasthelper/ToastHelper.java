@@ -1,5 +1,8 @@
 package com.relesee.toasthelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.relesee.services.RankLinesService;
 import com.relesee.util.ToastUtil;
 /**
@@ -18,5 +21,14 @@ public class ToastHelper {
 	}
 	public static String getSuccessToastMessage(String message){
 		return ToastUtil.getToast(success, message, successColor);
+	}
+	
+	public static String getIfFileExistToast(List<String> valueList){
+		List<String> titleList = new ArrayList<String>();
+		titleList.add("title");
+		titleList.add("message");
+		titleList.add("color");
+		titleList.add("isExist");
+		return ToastUtil.getToastModel(titleList, valueList);
 	}
 }

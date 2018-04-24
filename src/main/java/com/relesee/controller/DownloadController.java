@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
@@ -40,6 +43,9 @@ public class DownloadController {
 	 */
 	@RequestMapping("/download")
 	public void DownLoad(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		//Toast提示消息
+		List<String> valueList = new ArrayList<String>();
+		valueList.add("下载文件");
 		String fileName = req.getParameter("filename");
 		//文件的真实路径
 		String realPath = req.getServletContext().getRealPath("uploadfiles");
@@ -73,8 +79,10 @@ public class DownloadController {
 			e.printStackTrace();
 		}
 	}else{
-		//TODO 在这里写找不到文件的具体操作
-		resp.getWriter().write(ToastHelper.getErrorToastMessage("文件不存在"));
+		valueList.add("找不到该文件");
+		valueList.add("red");
+		valueList.add("false");
+		resp.getWriter().write(ToastHelper.getIfFileExistToast(valueList));
 		logger.debug("找不到文件");
 	}
 }
