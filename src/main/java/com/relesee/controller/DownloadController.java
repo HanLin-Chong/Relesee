@@ -17,6 +17,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.relesee.contant.Contant;
 import com.relesee.toasthelper.ToastHelper;
 
 
@@ -30,12 +31,13 @@ import com.relesee.toasthelper.ToastHelper;
 @Controller
 @RequestMapping("/load")
 public class DownloadController {
-	private String FILE_NOT_FOUND = "未找到文件";
-	private String BASE_URL = "localhost:8080/relesee/uploadfiles/";
+	
+	private String FILE_BASE_URL = Contant.FILE_BASE_RUL;
+	
 	private Log logger = LogFactory.getLog(DownloadController.class);
 	/**
 	 * 
-	 * @param req req，需要具体文件下载的目标值
+	 * @param req req param 需要文件的文件名
 	 * @param resp
 	 * @throws IOException 
 	 */
@@ -49,16 +51,15 @@ public class DownloadController {
 		String realPath = req.getServletContext().getRealPath("uploadfiles");
 		//获取文件
 		String filePath = realPath+"//"+fileName;
+		resp.setCharacterEncoding("utf-8");
 		File file = new File(filePath);
 		int fileLength = (int) file.length();
-		
 		logger.info("文件路径"+filePath);
 		InputStream in = null;
 		OutputStream out = null;
-	
+		
 		//判断文件是否存在
 		if(fileLength!=0){
-			resp.setCharacterEncoding("utf-8");
 			resp.setContentType("application/force-download");
 			resp.addHeader("Content-Disposition", "attachment;fileName="
 					+new String(fileName.getBytes("utf-8"), "ISO8859-1"));

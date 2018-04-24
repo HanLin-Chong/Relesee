@@ -14,4 +14,5 @@ public interface PriorLineDao{
 	public List<PriorLine> findWithState(String state);
 	public boolean deleteById(String priorlineid);
 	public PriorLine findById(String priorlineid);
+	public boolean updateById(String priorlineid);
 }
