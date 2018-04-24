@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.relesee.bean.RankItem;
 import com.relesee.bean.User;
+import com.relesee.contant.Contant;
 import com.relesee.services.RankLinesService;
 import com.relesee.util.DateUtil;
+import com.relesee.util.FileUtil;
 import com.relesee.util.ToastUtil;
 
 import net.sf.json.JSONArray;
@@ -93,10 +95,16 @@ public class RankLinesController {
 		String info;
 		//在一下的删除操作之前应该加一个判断，判断在数据库中是该ranklineid不存在
 		// 若不存即返回消息，数据库中不存在该条数据
-		if(this.rankLinesService.findById(ranklineid)!=null){
+		RankItem item = this.rankLinesService.findById(ranklineid);
+		if(item != null){
+			//获取文件的路径
+			String filePath =Contant.FILE_BASE_RUL + item.getFilesurl();
 			if(this.rankLinesService.deleteItem(ranklineid)){
-			
-				info = getSuccessToastMessage("删除成功");
+				if(FileUtil.deleteFile(filePath)){
+					info = getSuccessToastMessage("删除成功");
+				}else{
+					info = getSuccessToastMessage("删除成功,但是未找到审核资料，删除文件失败");
+				}
 			}else{
 				info = this.getErrorToastMessage("删除失败");
 			}
