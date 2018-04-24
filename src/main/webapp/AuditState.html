@@ -25,9 +25,12 @@
     <!-- iziToast -->
     <script src="js/iziToast.min.js" type="text/javascript"></script>
     <style>
-    	
+    	#dataTable th{
+    		text-align:center;
+    		background-color:#e6f9ff;
+			vertical-align:middle
+    	}
     </style>
-    
     
   </head>
   
@@ -96,7 +99,7 @@
 	                    //{ title: "文件名", icons: [{ glyph: "glyphicon-info-sign", handler: iconAction, data:"id" }], renderIf: isManager },
 	                    { field: "customerid", title: "客户ID", sort:false },
 	                    { field: "customertype", title: "客户性质", sort: false },
-	                    { field: "filesurl", title: "文件路径"},
+	                    { field: "filesurl", title: "文件路径" },
 	                    { field: "isnewfiles", title: "是否下载过", format:Downloaded },
 	                    { field: "state", title: "文件状态"   },
 	                    { field: "uploaddate", title: "上传时间"   },
@@ -164,6 +167,7 @@
          
 	        });//document ready
 			
+			//format:是否是新文件
 			function Downloaded(data){
 				if(data.isnewfiles==0){
 					return "新文件";

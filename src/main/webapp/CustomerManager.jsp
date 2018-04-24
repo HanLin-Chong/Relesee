@@ -1,5 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-
+<%@ page import="com.relesee.bean.User" %>
+<%
+	User user = (User) session.getAttribute("user");
+	
+ %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -71,9 +75,9 @@
                   <img class="img-responsive img-rounded" src="assets/img/user.jpg" alt="">
               </div>
               <div class="user-info">
-                  <span class="user-name">姓名：</span><!-- 名 <strong>姓</strong> -->
-                  <span class="user-role">工号：</span>
-                  <span class="user-role">机构号：</span>
+                  <span class="user-name">姓名：<%= user.getUsername() %></span><!-- 名 <strong>姓</strong> -->
+                  <span class="user-role">工号：<%= user.getUserid() %></span>
+                  <span class="user-role">机构号：<%= user.getDeptid() %></span>
                   <span class="user-role">手机号：</span>
                   <div class="user-status">                       
                       <a href="#"><span class="label label-success mylabelgroup">账号状态</span></a>
