@@ -16,14 +16,14 @@ import com.relesee.services.LoginServiceImpl;
 @Controller
 @RequestMapping("/user")
 public class LoginController {
-	@Resource(name="userService")
-	private LoginServiceImpl loginService;
+	@Autowired
+	private LoginServiceImpl loginServiceImpl;
 	@RequestMapping("/login")
 	public ModelAndView login(User user,HttpServletRequest req,Model model){
-		if(loginService.login(user)){
+		if(loginServiceImpl.login(user)){
 			System.out.println("登陆成功");
 			HttpSession session = req.getSession();
-			session.setAttribute("user", loginService.getUser(user));
+			session.setAttribute("user", loginServiceImpl.getUser(user));
 		}else{
 		       return new ModelAndView("/login.jsp");
 		}

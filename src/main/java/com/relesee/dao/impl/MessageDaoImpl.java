@@ -20,9 +20,9 @@ public class MessageDaoImpl extends BaseDaoImpl implements MessageDao {
 	public List<SocketMessage> findMessageById(String messageid, int type) {
 		String sql = "select senderid,accepterid,time,text,notes,MessageType from MessageRecords ";
 		if(type==MessageDao.DO_BY_ACCEPTER){
-			sql+= "where senderid="+messageid;
+			sql+= "where senderid="+"'"+messageid+"'";
 		}else{
-			sql+= "where accepterid"+messageid;
+			sql+= "where accepterid"+"'"+messageid+"'";
 		}
 		return this.find(sql, SocketMessage.class);
 	}
@@ -54,10 +54,9 @@ public class MessageDaoImpl extends BaseDaoImpl implements MessageDao {
 	 */
 	@Override
 	public boolean addMessage(SocketMessage message) {
-		
 		String sql = "insert into MessageRecords(senderid,AccepterId,time,text,state,Notes,MessageType) "
 				+ "values(?,?,?,?,?,?,?)";
-		
+		// 将以下的相关参数书保存到数据库中
 		Object[] obj = new Object[]{
 			message.getSenderid(),
 			message.getAccepterid(),
