@@ -2,6 +2,8 @@
 <%@ page import="com.relesee.bean.User" %>
 <%
 	User user = (User) session.getAttribute("user");
+	if(user != null){
+	
 	
  %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -269,3 +271,7 @@
 
   </body>
 </html>
+
+<% 
+	}
+%>
