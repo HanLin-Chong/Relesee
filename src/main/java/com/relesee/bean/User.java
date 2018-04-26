@@ -6,6 +6,7 @@ import java.io.Serializable;
  * 用户表
  */
 public class User implements Serializable{
+	
 	private String username="";
 	
 	private String userid="";
@@ -14,9 +15,25 @@ public class User implements Serializable{
 	
 	private String password="";
 	
-	private String emial;
+	private String email;
+	
+	private String phone;
+	
+	private String headphoto;
 	
 	private int userauth=0;
+	
+	private String userstate;
+	
+	
+	public String getUserstate() {
+		return userstate;
+	}
+	
+
+	public void setUserstate(String userstate) {
+		this.userstate = userstate;
+	}
 
 	public String getUsername() {
 		return username;
@@ -28,6 +45,30 @@ public class User implements Serializable{
 
 	public String getUserid() {
 		return userid;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getHeadphoto() {
+		return headphoto;
+	}
+
+	public void setHeadphoto(String headphoto) {
+		this.headphoto = headphoto;
 	}
 
 	public void setUserid(String userid) {

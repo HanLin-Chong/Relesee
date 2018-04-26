@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.relesee.bean.RankItem;
+import com.relesee.contant.Contant;
 import com.relesee.dao.impl.RankItemDaoImpl;
 
 @Service("rankLinesService")
@@ -69,7 +70,8 @@ public class RankLinesService {
 	}
 	
 	public boolean deleteItem(String ranklineid){
-		 return rankItemDao.deleteItem(ranklineid);
+	
+		return rankItemDao.deleteItem(ranklineid);
 	}
 	
 	public RankItem findById(String ranklineid){
