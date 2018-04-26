@@ -39,6 +39,7 @@ public class MyWebSocketHandler implements WebSocketHandler{
 		System.out.println(userid);
 		if(userSocketSessionMap.get(userid)== null){
 			userSocketSessionMap.put(userid, session);
+			System.out.println(userid);
 		}	
 		TextMessage message=new TextMessage("Helllo This is a Test");
 		this.handleMessage(session, message);
@@ -115,19 +116,21 @@ public class MyWebSocketHandler implements WebSocketHandler{
 	 * 向指定的用户发送webSocket消息
 	 * TODO 待补充消息的后台处理流程，包括发送消息的记录，无论发送成功与否
 	 */
-	public void sendMessageToTarget(final TextMessage message,String userid){
+	public boolean sendMessageToTarget(final TextMessage message,String userid){
 		if(userSocketSessionMap.containsKey(userid)){
 			logger.info(message.toString()+" 消息已被转发至-->"+userid);
 			WebSocketSession session = userSocketSessionMap.get(userid);
 			try {
-
 				session.sendMessage(message);
+				return true;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}else{
 			logger.info("当前用户不在线，消息被搁置");
+			return false;
 		}
+		return false;
 	
 	}
 	
