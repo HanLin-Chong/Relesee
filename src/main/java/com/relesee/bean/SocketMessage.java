@@ -1,6 +1,9 @@
 package com.relesee.bean;
 
 public class SocketMessage {
+	
+
+	
 	private String senderid;
 	private String accepterid;
 	private String text;
