@@ -34,6 +34,18 @@ public class MessageController {
 		if(targetId.startsWith("MSID")){
 			messageList = messageService.getMessageByAccepterId(targetId, MessageDao.MESSAGE_READ);
 		}else{
+			messageList = messageService.getMessageSendererId(targetId, MessageDao.MESSAGE_READ);
+		}
+		resp.getWriter().write(JSONArray.fromObject(messageList).toString());
+	}
+	
+	@RequestMapping("get_history_message")
+	public void getHistoryMessage(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		List<SocketMessage> messageList;
+		String targetId = req.getParameter("id");
+		if(targetId.startsWith("MSID")){
+			messageList = messageService.getMessageByAccepterId(targetId, MessageDao.MEESAGE_NOT_READ);
+		}else{
 			messageList = messageService.getMessageSendererId(targetId, MessageDao.MEESAGE_NOT_READ);
 		}
 		resp.getWriter().write(JSONArray.fromObject(messageList).toString());
