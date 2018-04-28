@@ -27,4 +27,6 @@ public interface MessageDao {
 	public boolean deleteById(String message, int type);
 	public boolean addMessage(SocketMessage messaeg);;
 	
+	public boolean updateMessageById(String id, int type, int newState);
+	
 }
