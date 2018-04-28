@@ -19,15 +19,49 @@ import com.relesee.services.WebSocketService;
 import com.relesee.util.DateUtil;
 import com.relesee.websocket.MyWebSocketHandler;
 
+
+/**
+ * 
+ * @author jinfeng
+ * 	websocket的controller类， 
+ * @param  text 发送消息的内容, accepterid消息的接受着
+ */
 @Controller
-@RequestMapping()
+@RequestMapping("message")
 public class WebSocketController {
 	private final org.apache.commons.logging.Log logger =LogFactory.getLog(WebSocketController.class);
+	
+	//消息类型  设置默认的消息类型为普通
+	
+	private final String  MESSAGE_STATE = "普通";
+	
 	@Autowired private WebSocketService webSocketService;
-	@RequestMapping("/test")
-	public void sendMessage(HttpServletResponse resp, HttpServletRequest req){
+	
+	@RequestMapping("/send")
+	public void SendMessage(HttpServletResponse resp, HttpServletRequest req){
+
 		
 		//获取消息的发送者与接收者
+		HttpSession session = req.getSession();
+		User user = (User) session.getAttribute("user");
+		String  messageFrom = user.getUserid();
+		String accepterid= req.getParameter("accepterid");
+		String text = req.getParameter("text");
+		
+		// 组成消息对象
+		SocketMessage message = new SocketMessage();
+		message.setAccepterid(accepterid);
+		message.setSenderid(user.getUserid());
+		message.setText(text);
+		message.setTime(DateUtil.getTime());
+		message.setState(MESSAGE_STATE);
+		message.setText(text);
+		//发送消息
+		webSocketService.sendMessage(message);
+
+	}
+	
+	public void sendMessage(HttpServletRequest req, HttpServletResponse resp){
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute("user");
 		String  messageFrom = user.getUserid();
@@ -36,9 +70,8 @@ public class WebSocketController {
 		SocketMessage message = new SocketMessage();
 		message.setAccepterid(messageFrom );
 		message.setSenderid(user.getUserid());
-		message.setText("nihao");
 		message.setTime(DateUtil.getTime());
-		message.setState("普通");
+		message.setState(MESSAGE_STATE);
 		webSocketService.sendMessage(message);
 	}
 }
