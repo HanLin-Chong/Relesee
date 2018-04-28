@@ -74,16 +74,16 @@
           </div>
           <div class="sidebar-header">
               <div class="user-pic">
-                  <img class="img-responsive img-rounded" src="assets/img/user.jpg" alt="">
+                  <img class="img-responsive img-rounded" src="img/<%= user.getHeadphoto() %>" alt="">
               </div>
               <div class="user-info">
                   <span class="user-name">姓名：<%= user.getUsername() %></span><!-- 名 <strong>姓</strong> -->
                   <span class="user-role">工号：<%= user.getUserid() %></span>
                   <span class="user-role">机构号：<%= user.getDeptid() %></span>
-                  <span class="user-role">手机号：</span>
+                  <span class="user-role">手机号：<%= user.getPhone() %></span>
                   <div class="user-status">                       
-                      <a href="#"><span class="label label-success mylabelgroup">账号状态</span></a>
-                      <a href="#"><span class="label label-primary mylabelgroup">客户经理</span></a>                        
+                      <a href="#"><span class="label label-success mylabelgroup">账号状态：<%= user.getUserstate() %></span></a>
+                                           
                   </div>
               </div>
           </div><!-- sidebar-header  -->
