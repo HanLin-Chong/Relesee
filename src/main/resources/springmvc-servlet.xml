@@ -14,11 +14,14 @@
 		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
 	    http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context.xsd
-		 http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+		
+		<import resource="classpath*:spring-aop.xml"/>
+		<import resource="classpath*:spring-domain.xml"></import>
 		
 		<!-- 更具不同的配置文件类型，把配置文件分成不同的部分，便于后期的系统维护 -->
-		<import resource="spring-aop.xml"/>
-		<import resource="spring-domain.xml"/>
+
 	<!-- 
 		 <mvc:interceptors>
 	 	<mvc:interceptor>
@@ -65,17 +68,4 @@
 	<aop:aspectj-autoproxy proxy-target-class="true" />  
 	<bean id="logAspect" class="com.relesee.aop.LoginServiceAspect"></bean>
 	<!-- -->
-	
-	<!--
-	 开启对WebSocket的支持 
-	<bean id="websocket" class="websocket.WebSocketEndPoint"></bean>
-	<websocket:handlers>
-		<websocket:mapping path="/websocket" handler="websocket"></websocket:mapping>
-		<websocket:handshake-interceptors>
-			<bean class="websocket.HandShakeInterceptor"></bean>
-		</websocket:handshake-interceptors>
-	</websocket:handlers>
-		
-	  -->
-	
 </beans>
