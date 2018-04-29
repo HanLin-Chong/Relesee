@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     } else if ('MozWebSocket' in window) {  
         websocket = new MozWebSocket("ws://" + path + "wsMy?jspCode=" + userId);  
     } else {  
-        websocket = new SockJS("http://" + path + "wsMy/sockjs?jspCode=" + jspCode);  
+        websocket = new SockJS("http://" + path + "wsMy/sockjs?jspCode=" + userid);  
     }  
     websocket.onopen = function(event) {  
         console.log("WebSocket:已连接");  
@@ -65,6 +65,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     $(document).ready(function(){
     	alert("<%=basePath %>");
     });
+    
+    function(){
+    	
+    }
     
 </script>  
   

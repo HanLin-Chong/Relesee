@@ -12,6 +12,8 @@ import com.relesee.dao.MessageDao;
 import com.relesee.dao.impl.MessageDaoImpl;
 import com.relesee.websocket.MyWebSocketHandler;
 
+import net.sf.json.JSONArray;
+
 /**
  * 
  * @author jinfeng
@@ -31,7 +33,9 @@ public class WebSocketService {
 	 */
 	public void sendMessage(SocketMessage message){
 		
-		TextMessage testMessage = new TextMessage(message.getText());
+		String messageText = JSONArray.fromObject(message).toString();
+		//将message转为json格式想前段转发
+		TextMessage testMessage = new TextMessage(messageText);
 		
 		// true表示接受消息的用户处在在线的状态
 		if(myWebSocketHandler.sendMessageToTarget(testMessage,message.getAccepterid())){
