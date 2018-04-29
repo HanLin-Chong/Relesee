@@ -31,17 +31,19 @@
   </head>
   
   <body>
-  	以MSID_0000005向MSID_0000002发送消息
-	<button id="send">send</button>
+  	接受MSID_0000005发来的消息
+
 	<script>
 		$(document).ready(function(){
-		var wo = new wsOperation("127.0.0.1:8080/relesee/","MSID_0000005");
-			$("#send").click(function(){
 
+
+			var wo = new wsOperation("127.0.0.1:8080/relesee/","MSID_0000002");
 				
-				wo.send("MSID_0000002", "你好，我用draft.html给你发了消息");
-			});
+			
 		});
+		function msgProcessor(e){
+			show(e.data);
+		}
 	</script>
   </body>
 </html>

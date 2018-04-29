@@ -1,6 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="com.relesee.bean.User" %>
 <%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
 	User user = (User) session.getAttribute("user");
 	if(user != null){
 	
@@ -54,8 +57,11 @@
     <script src="js/custom.js"></script>
     <!-- iziToast -->
     <script src="js/iziToast.min.js" type="text/javascript"></script>
-    <!-- <script src="js/ToastTrigger.js" type="text/javascript"></script>-->
+    
+    <!-- sock对象 -->
+    <script src="js/Socket.js" type="text/javascript"></script>
     <style>
+    	/*调整用户信息下的两个label*/
     	.label{
     		float:left;
     		margin-left:5px;
@@ -203,6 +209,9 @@
   <script>
   //自定义class：.pageloder-trigger 所有点击需要切换页面的html元素，需要有“whichpage=""”属相
   	$(document).ready(function(){
+  		与服务器建立socket连接
+  		var wsOperation = new wsOperation("127.0.0.1:8080/relesee/","MSID_0000005");
+  		var path = '<%=basePath %>'; 
   		
   		//所有pageloder-trigger类，只要添加whichpage属性就可实现加载该页面
   		$(".pageloder-trigger").click(function(e){
