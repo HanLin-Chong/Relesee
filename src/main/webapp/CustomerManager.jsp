@@ -3,7 +3,7 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-
+	System.out.println(basePath);
 	User user = (User) session.getAttribute("user");
 	if(user != null){
 	
@@ -147,10 +147,10 @@
 				<li><a href="#" class="trigger-custom2">Custom II</a></li>
 				<li class="trigger-success"></li>-->
 				<button id="trigger" data-toggle="tooltip" data-placement="bottom" title="haha">触发Toast</button>
-
+			
 			
 			</center>
-      
+
       </main><!-- page-content" -->
   </div><!-- page-wrapper -->  
   
@@ -167,18 +167,14 @@
 	        	<h4 class="modal-title" id="myModalLabel">消息中心</h4>
 	      	</div>
 	      	<div class="modal-body">
-	      		<ul class="list-group">
-			  	<a class="list-group-item">消息标题---正文取前几个字+“。。。”---产生时间</a>
-			 	 <a class="list-group-item">消息2</a>
-			 	 <a class="list-group-item">消息3</a>
-			  	<a class="list-group-item">消息4</a>
-			  	<a class="list-group-item">消息5</a>
+	      		<ul id="listview" class="list-group">
+			  	空
 				</ul>
 	      	</div>
 	      	
 	      	<div class="modal-footer">
 	      		
-				  <ul class="pagination" style="margin:15px 0px;padding:0px;float:left">
+				  <ul id="pg" class="pagination" style="cursor:pointer;margin:15px 0px;padding:0px;float:left">
 				    <li>
 				      <a  aria-label="Previous">
 				        <span aria-hidden="true">&laquo;</span>
@@ -209,9 +205,53 @@
   <script>
   //自定义class：.pageloder-trigger 所有点击需要切换页面的html元素，需要有“whichpage=""”属相
   	$(document).ready(function(){
-  		与服务器建立socket连接
-  		var wsOperation = new wsOperation("127.0.0.1:8080/relesee/","MSID_0000005");
-  		var path = '<%=basePath %>'; 
+  		//与服务器建立socket连接
+  		
+  		var uid = "<%=user.getUserid() %>";
+  		var basepath = "<%=basePath %>";
+  		//console.log(basepath);
+  		basepath = basepath.substring(7);
+  		//console.log(basepath);
+  		var wso = new wsOperation(basepath,uid);
+  		//请求离线消息
+  		$.ajax({
+  			url:"message/get_history_message",
+  			data:{id:uid},
+  			async:false,method:"post",
+  			success:function(data){
+
+  				data = JSON.parse(data);
+  				var msgcenter = new MessageCenter("listview","pg",data);
+			  	$(".pagenumberlist").click(function(e){
+					msgcenter.pageChange(e.currentTarget.innerText);
+				});
+				$("#message_previous_page_button").click(function(){
+					msgcenter.pageChange((msgcenter.currentPage-1)*1);
+				});
+				$("#message_next_page_button").click(function(){
+					msgcenter.pageChange((msgcenter.currentPage*1+1)*1);
+				});
+				$(".list-group-item").each(function(index,e){
+					console.log(index,e);
+					$(e).click(function(){
+						//alert(index);
+						console.log(msgcenter.data[index]);
+					});
+				});
+  				iziToast.show({
+				    title: '离线消息',
+				    message: '您有离线消息未阅读,关闭此提示后将为您打开消息中心',
+				    color:'yellow',
+				    layout:1,
+				    position:'topRight',
+				    timeout:10000,
+				    onClose: function () {
+				    	$("#notifications-modal").modal('show');
+				    }
+				});
+  			}
+  		}); 
+  		 
   		
   		//所有pageloder-trigger类，只要添加whichpage属性就可实现加载该页面
   		$(".pageloder-trigger").click(function(e){
@@ -226,7 +266,10 @@
 			    title: '你好',
 			    message: '这是测试toast',
 			    color:'blue',
-			    layout:1
+			    layout:1,
+			    onClose: function () {
+			    	
+			    }
 			});
 		});
 		
@@ -241,6 +284,10 @@
 		},500)
 		
   	});
+  	//onmessage回调此函数
+  	function msgProcessor(data){
+  		console.log(data);
+  	}
   	/*
   	iziToast.show({
     class: '',

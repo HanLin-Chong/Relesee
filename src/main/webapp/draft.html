@@ -33,6 +33,30 @@
   <body>
   	以MSID_0000005向MSID_0000002发送消息
 	<button id="send">send</button>
+	<ul id="pg" class="pagination" style="cursor:pointer;margin:15px 0px;padding:0px;float:left">
+		<li id="message_previous_page_button">	
+			<a aria-label="Previous">		
+				<span aria-hidden="true">«</span>	
+			</a>
+		</li>
+		<li class="pagenumberlist" style="background-color: rgb(105, 59, 59);">
+			<a>1</a>
+		</li>
+		<li class="pagenumberlist" style="background-color: rgb(255, 255, 255);">
+			<a>2</a>
+		</li>
+		<li class="pagenumberlist" style="background-color: rgb(255, 255, 255);">
+			<a>3</a>
+		</li>
+		<li class="pagenumberlist" >
+			<a style="background-color: #337ab7">4</a>
+		</li>
+		<li id="message_next_page_button">	
+			<a aria-label="Next">		
+				<span aria-hidden="true">»</span>	
+			</a>
+		</li>
+	</ul>
 	<script>
 		$(document).ready(function(){
 		var wo = new wsOperation("127.0.0.1:8080/relesee/","MSID_0000005");
