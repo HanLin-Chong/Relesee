@@ -66,9 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	alert("<%=basePath %>");
     });
     
-    function(){
-    	
-    }
+    
     
 </script>  
   
