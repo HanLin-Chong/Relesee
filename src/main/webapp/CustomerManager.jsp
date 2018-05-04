@@ -166,9 +166,27 @@
 	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        	<h4 class="modal-title" id="myModalLabel">消息中心</h4>
 	      	</div>
-	      	<div class="modal-body">
-	      		<ul id="listview" class="list-group">
+	      	<div class="modal-body row">
+	      		<ul id="listview" class="list-group col-md-8" >
 			  	空
+				</ul>
+				<ul class="well col-md-4" style="width:32%;">
+					<div id="the_other" style="height:50px">
+						与XX的会话
+					</div>
+					<div id="message_area" style="overflow:scroll;height:230px;border:1px #ff0000">
+						消息
+					</div>
+					<div id="input_area" class="input-group">
+						
+						<textarea class="form-control" rows="1" style="resize:none ">
+							
+						</textarea>
+			      		<span class="input-group-btn">
+			        		<button class="btn btn-default" type="button">发送</button>
+			        		<button class="btn btn-default" type="button">备用</button>
+			      		</span>
+					</div>
 				</ul>
 	      	</div>
 	      	
@@ -221,6 +239,7 @@
   			success:function(data){
 
   				data = JSON.parse(data);
+  				console.log(data);
   				var msgcenter = new MessageCenter("listview","pg",data);
 			  	$(".pagenumberlist").click(function(e){
 					msgcenter.pageChange(e.currentTarget.innerText);
@@ -287,6 +306,15 @@
   	//onmessage回调此函数
   	function msgProcessor(data){
   		console.log(data);
+  		iziToast.show({
+  				title: 'XX人',
+			    message: data,
+			    color:'blue',
+			    layout:1,
+			    onClose: function () {
+			    	
+			    }
+  		});
   	}
   	/*
   	iziToast.show({
