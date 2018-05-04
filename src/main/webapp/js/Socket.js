@@ -59,17 +59,6 @@ wsOperation.prototype.send = function(accepterid,text){
 		}
 	})
 }
-/*
-//方法
-wsOperation.prototype.receiveOffLine = function(){
-	
-}
-
-//方法
-wsOperation.prototype.receiveOnLine = function(){
-	
-}
-*/
 
 //声明MessageCenter对象,此对象一个页面只能定义一个,否则会造成DOM错误
 //构造方法
@@ -88,7 +77,6 @@ function MessageCenter(ViewContainerID,paginationID,msgJson){
 //方法
 MessageCenter.prototype.pageChange = function(pageno){
 	//pageno最小为1
-	//alert(pageno);
 	
 	if(pageno<=0){
 		alert("已经在第一页");
@@ -98,8 +86,6 @@ MessageCenter.prototype.pageChange = function(pageno){
 
 		this.currentPage = pageno;
 		this.loadPage(pageno);
-		//this.generatePagination();
-		//$(".pagenumberlist").css({"background-color":"#eee"});
 		$(".pagenumberlist").each(function(index,e){
 			if(index*1+1 == pageno){//如果是当前页
 				
@@ -110,8 +96,6 @@ MessageCenter.prototype.pageChange = function(pageno){
 				e.firstChild.style.color = "#337ab7";//文件
 				
 			}
-			console.log(index);
-			console.log(e);
 		});
 	}
 	
@@ -127,12 +111,12 @@ MessageCenter.prototype.loadPage = function(pageno){
 
 		for(var i = (pageno-1)*this.pageSize; i<(pageno-1)*this.pageSize+how_much_message_in_last_page ;i++){
 			
-			list += '<a class="list-group-item" style="height:100px;overflow:hidden;cursor:pointer">';
+			list += '<a class="list-group-item" style="height:70px;overflow:hidden;cursor:pointer">';
 			list += '	<div style="width:100%;height:30px">';
 			list += '		<div class="pull-left" style="color:#0e96ca;cursor:pointer">'+this.data[i].senderid+'</div>';
 			list += '		<div class="pull-right" style="color:#0e96ca;cursor:pointer">'+this.data[i].time+'</div>';
-			list += '	</div>'
-			list += '	<div style="height:50px;overflow:hidden;cursor:pointer">';
+			list += '	</div>';
+			list += '	<div style="height:20px;overflow:hidden;cursor:pointer">';
 			list += this.data[i].text;
 			list += '	</div>';
 			list += "</a>";
@@ -143,12 +127,12 @@ MessageCenter.prototype.loadPage = function(pageno){
 		for(var i = (pageno-1)*this.pageSize;i < this.pageSize*pageno;i++){
 				
 			
-			list += '<a class="list-group-item" style="height:100px;overflow:hidden;cursor:pointer">';
+			list += '<a class="list-group-item" style="height:70px;overflow:hidden;cursor:pointer">';
 			list += '	<div style="width:100%;height:30px">';
 			list += '		<div class="pull-left" style="color:#0e96ca;cursor:pointer">'+this.data[i].senderid+'</div>';
 			list += '		<div class="pull-right" style="color:#0e96ca;cursor:pointer">'+this.data[i].time+'</div>';
 			list += '	</div>'
-			list += '	<div style="height:50px;overflow:hidden;cursor:pointer">';
+			list += '	<div style="height:20px;overflow:hidden;cursor:pointer">';
 			list += this.data[i].text;
 			list += '	</div>';
 			list += "</a>";
@@ -191,8 +175,8 @@ MessageCenter.prototype.generatePagination = function(){
 	*/
 }
 
-
+/*
 function show(t){
 	$("body").append("<hr/>"+t);
 	
-}
+}*/
