@@ -28,7 +28,6 @@ public class LoginServiceAspect {
 	User user = new User();
 	@Before("login()")
 	public void doBefor(JoinPoint joinPoint){
-	
 			user = (User) joinPoint.getArgs()[0];
 	}
 	@After("login()")

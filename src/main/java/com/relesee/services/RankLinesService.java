@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import com.relesee.annotation.Operator;
 import com.relesee.bean.RankItem;
 import com.relesee.contant.Contant;
 import com.relesee.dao.impl.RankItemDaoImpl;
@@ -23,6 +24,8 @@ public class RankLinesService {
 	 * 根据项目的审核状态查询订单
 	 * 当状态值输入为空的时候，默认查询全部状态的审核项目
 	 */
+	
+	@Operator(target="RankItem", operator="查找")
 	public List<RankItem> getRankItems(String status){
 		if("".equals(status) || status==null) status = "排队待审核";
 		this.rankItemDao.setJdbcTemplate(jdbcTemplate);

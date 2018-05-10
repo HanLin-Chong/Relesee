@@ -67,5 +67,6 @@
 <!-- 开启aspect对spring的支持 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />  
 	<bean id="logAspect" class="com.relesee.aop.LoginServiceAspect"></bean>
+	<bean id="rankLinesAspect" class="com.relesee.aop.DoLog"></bean>
 	<!-- -->
 </beans>

@@ -51,10 +51,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         alert("WebSocket:收到一条消息"+data);  
     };  
     websocket.onerror = function(event) {  
-    
-    
-    
-    
         console.log("WebSocket:发生错误 ");  
         console.log(event);  
     };  
@@ -66,9 +62,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	alert("<%=basePath %>");
     });
     
-    function(){
-    	
-    }
     
 </script>  
   

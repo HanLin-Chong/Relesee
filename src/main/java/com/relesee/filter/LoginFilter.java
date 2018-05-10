@@ -33,14 +33,14 @@ public class LoginFilter implements Filter{
 		user=(User)request.getSession().getAttribute("user");
 		RequestDispatcher rd = null;
 		if(path.endsWith("relesee/login.jsp")||path.endsWith("relesee/index.jsp")||path.endsWith("user/login")){
-		
-		}
-		else if(user==null){
+			chain.doFilter(req, response);	
+		}else if(user==null){
 			 reps.sendRedirect("/relesee/login.jsp");
+			 
 		}else{
-			
+			chain.doFilter(req, response);		
 		} 
-		chain.doFilter(req, response);				
+			
 	}
 
 	@Override
