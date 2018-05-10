@@ -1,6 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="com.relesee.bean.User" %>
 <%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	System.out.println(basePath);
 	User user = (User) session.getAttribute("user");
 	if(user != null){
 	
@@ -54,8 +57,11 @@
     <script src="js/custom.js"></script>
     <!-- iziToast -->
     <script src="js/iziToast.min.js" type="text/javascript"></script>
-    <!-- <script src="js/ToastTrigger.js" type="text/javascript"></script>-->
+    
+    <!-- sock对象 -->
+    <script src="js/Socket.js" type="text/javascript"></script>
     <style>
+    	/*调整用户信息下的两个label*/
     	.label{
     		float:left;
     		margin-left:5px;
@@ -74,16 +80,16 @@
           </div>
           <div class="sidebar-header">
               <div class="user-pic">
-                  <img class="img-responsive img-rounded" src="assets/img/user.jpg" alt="">
+                  <img class="img-responsive img-rounded" src="img/<%= user.getHeadphoto() %>" alt="">
               </div>
               <div class="user-info">
                   <span class="user-name">姓名：<%= user.getUsername() %></span><!-- 名 <strong>姓</strong> -->
                   <span class="user-role">工号：<%= user.getUserid() %></span>
                   <span class="user-role">机构号：<%= user.getDeptid() %></span>
-                  <span class="user-role">手机号：</span>
+                  <span class="user-role">手机号：<%= user.getPhone() %></span>
                   <div class="user-status">                       
-                      <a href="#"><span class="label label-success mylabelgroup">账号状态</span></a>
-                      <a href="#"><span class="label label-primary mylabelgroup">客户经理</span></a>                        
+                      <a href="#"><span class="label label-success mylabelgroup">账号状态：<%= user.getUserstate() %></span></a>
+                                           
                   </div>
               </div>
           </div><!-- sidebar-header  -->
@@ -141,10 +147,10 @@
 				<li><a href="#" class="trigger-custom2">Custom II</a></li>
 				<li class="trigger-success"></li>-->
 				<button id="trigger" data-toggle="tooltip" data-placement="bottom" title="haha">触发Toast</button>
-
+			
 			
 			</center>
-      
+
       </main><!-- page-content" -->
   </div><!-- page-wrapper -->  
   
@@ -160,19 +166,33 @@
 	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        	<h4 class="modal-title" id="myModalLabel">消息中心</h4>
 	      	</div>
-	      	<div class="modal-body">
-	      		<ul class="list-group">
-			  	<a class="list-group-item">消息标题---正文取前几个字+“。。。”---产生时间</a>
-			 	 <a class="list-group-item">消息2</a>
-			 	 <a class="list-group-item">消息3</a>
-			  	<a class="list-group-item">消息4</a>
-			  	<a class="list-group-item">消息5</a>
+	      	<div class="modal-body row">
+	      		<ul id="listview" class="list-group col-md-8" >
+			  	空
+				</ul>
+				<ul class="well col-md-4" style="width:32%;">
+					<div id="the_other" style="height:50px">
+						与XX的会话
+					</div>
+					<div id="message_area" style="overflow:scroll;height:230px;border:1px #ff0000">
+						消息
+					</div>
+					<div id="input_area" class="input-group">
+						
+						<textarea class="form-control" rows="1" style="resize:none ">
+							
+						</textarea>
+			      		<span class="input-group-btn">
+			        		<button class="btn btn-default" type="button">发送</button>
+			        		<button class="btn btn-default" type="button">备用</button>
+			      		</span>
+					</div>
 				</ul>
 	      	</div>
 	      	
 	      	<div class="modal-footer">
 	      		
-				  <ul class="pagination" style="margin:15px 0px;padding:0px;float:left">
+				  <ul id="pg" class="pagination" style="cursor:pointer;margin:15px 0px;padding:0px;float:left">
 				    <li>
 				      <a  aria-label="Previous">
 				        <span aria-hidden="true">&laquo;</span>
@@ -203,6 +223,54 @@
   <script>
   //自定义class：.pageloder-trigger 所有点击需要切换页面的html元素，需要有“whichpage=""”属相
   	$(document).ready(function(){
+  		//与服务器建立socket连接
+  		
+  		var uid = "<%=user.getUserid() %>";
+  		var basepath = "<%=basePath %>";
+  		//console.log(basepath);
+  		basepath = basepath.substring(7);
+  		//console.log(basepath);
+  		var wso = new wsOperation(basepath,uid);
+  		//请求离线消息
+  		$.ajax({
+  			url:"message/get_history_message",
+  			data:{id:uid},
+  			async:false,method:"post",
+  			success:function(data){
+
+  				data = JSON.parse(data);
+  				console.log(data);
+  				var msgcenter = new MessageCenter("listview","pg",data);
+			  	$(".pagenumberlist").click(function(e){
+					msgcenter.pageChange(e.currentTarget.innerText);
+				});
+				$("#message_previous_page_button").click(function(){
+					msgcenter.pageChange((msgcenter.currentPage-1)*1);
+				});
+				$("#message_next_page_button").click(function(){
+					msgcenter.pageChange((msgcenter.currentPage*1+1)*1);
+				});
+				$(".list-group-item").each(function(index,e){
+					console.log(index,e);
+					$(e).click(function(){
+						//alert(index);
+						console.log(msgcenter.data[index]);
+					});
+				});
+  				iziToast.show({
+				    title: '离线消息',
+				    message: '您有离线消息未阅读,关闭此提示后将为您打开消息中心',
+				    color:'yellow',
+				    layout:1,
+				    position:'topRight',
+				    timeout:10000,
+				    onClose: function () {
+				    	$("#notifications-modal").modal('show');
+				    }
+				});
+  			}
+  		}); 
+  		 
   		
   		//所有pageloder-trigger类，只要添加whichpage属性就可实现加载该页面
   		$(".pageloder-trigger").click(function(e){
@@ -217,7 +285,10 @@
 			    title: '你好',
 			    message: '这是测试toast',
 			    color:'blue',
-			    layout:1
+			    layout:1,
+			    onClose: function () {
+			    	
+			    }
 			});
 		});
 		
@@ -232,6 +303,19 @@
 		},500)
 		
   	});
+  	//onmessage回调此函数
+  	function msgProcessor(data){
+  		console.log(data);
+  		iziToast.show({
+  				title: 'XX人',
+			    message: data,
+			    color:'blue',
+			    layout:1,
+			    onClose: function () {
+			    	
+			    }
+  		});
+  	}
   	/*
   	iziToast.show({
     class: '',

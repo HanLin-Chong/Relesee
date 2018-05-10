@@ -25,6 +25,7 @@ import net.sf.json.JSONArray;
 @Controller
 @RequestMapping("/message")
 public class MessageController {
+	private final String USER_TYPE="MSID";
 	@Autowired
 	private MessageService messageService;
 	@RequestMapping("/get_message")
@@ -49,5 +50,14 @@ public class MessageController {
 			messageList = messageService.getMessageSendererId(targetId, MessageDao.MEESAGE_NOT_READ);
 		}
 		resp.getWriter().write(JSONArray.fromObject(messageList).toString());
+	}
+	
+	@RequestMapping("/read_meesage")
+	public void readMessage(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+	   	int successedCount;
+		 String messageid = req.getParameter("message_list");
+		 String[] messageList = messageid.split(";");
+	   	successedCount = this.messageService.updateByMessage(messageList, MessageDao.MESSAGE_READ);
+		 resp.getWriter().write(successedCount+"条消息已执行成功");
 	}
 }

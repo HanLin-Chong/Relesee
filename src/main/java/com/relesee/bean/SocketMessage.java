@@ -1,5 +1,12 @@
 package com.relesee.bean;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * @author jinfeng
+ *
+ */
 public class SocketMessage {
 	
 
@@ -11,7 +18,14 @@ public class SocketMessage {
 	private String messagetype;
 	private String notes;
 	private String state;
+	private String messageid;
 	
+	public String getMessageid() {
+		return messageid;
+	}
+	public void setMessageid(String messageid) {
+		this.messageid = messageid;
+	}
 	public void setState(String state){
 		this.state = state;
 	}
@@ -55,4 +69,12 @@ public class SocketMessage {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+	
+	public static String generateId(){
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+		String dateToString = "MSID"+format.format(date).toString();
+		return dateToString;
+	}
+	
 }
