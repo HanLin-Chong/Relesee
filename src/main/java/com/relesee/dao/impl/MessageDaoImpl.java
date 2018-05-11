@@ -32,7 +32,8 @@ public class MessageDaoImpl extends BaseDaoImpl implements MessageDao {
 		//消息已读
 		case MessageDao.MEESAGE_NOT_READ:
 			if(type==MessageDao.DO_BY_ACCEPTER){
- 
+
+
 				sql+= "where senderid="+"'"+userid+"' and state="+"'"+MessageDao.MEESAGE_NOT_READ+"'";
 			}else{
 				sql+= "where accepterid"+"'"+userid+"' and state="+"'"+MessageDao.MEESAGE_NOT_READ+"'";

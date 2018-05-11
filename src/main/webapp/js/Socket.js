@@ -63,6 +63,9 @@ wsOperation.prototype.send = function(accepterid,text){
 //声明MessageCenter对象,此对象一个页面只能定义一个,否则会造成DOM错误
 //构造方法
 function MessageCenter(ViewContainerID,paginationID,msgJson){
+	if(msgJson.length == 0 || msgJson == null){
+		msgJson = JSON.parse('[{"accepterid":"","messageid":"","messagetype":"","notes":"","senderid":"","state":"0","text":"无消息","time":""}]');
+	}
 	this.data = msgJson;
 	this.length = this.data.length;
 	this.pageSize = 5;
@@ -73,6 +76,14 @@ function MessageCenter(ViewContainerID,paginationID,msgJson){
 	
 	this.generatePagination();
 	this.loadPage(1);
+	$(".pagenumberlist").each(function(index,e){
+		if(index == 0){
+			e.firstChild.style.backgroundColor = "#337ab7";//背景
+			e.firstChild.style.color = "#ffffff";//文字
+		}
+			
+			
+	});
 }
 //方法
 MessageCenter.prototype.pageChange = function(pageno){
@@ -90,10 +101,10 @@ MessageCenter.prototype.pageChange = function(pageno){
 			if(index*1+1 == pageno){//如果是当前页
 				
 				e.firstChild.style.backgroundColor = "#337ab7";//背景
-				e.firstChild.style.color = "#ffffff";//文件
+				e.firstChild.style.color = "#ffffff";//文字
 			}else{//不是当前页
 				e.firstChild.style.backgroundColor = "#fff";//背景
-				e.firstChild.style.color = "#337ab7";//文件
+				e.firstChild.style.color = "#337ab7";//文字
 				
 			}
 		});
@@ -113,7 +124,15 @@ MessageCenter.prototype.loadPage = function(pageno){
 			
 			list += '<a class="list-group-item" style="height:70px;overflow:hidden;cursor:pointer">';
 			list += '	<div style="width:100%;height:30px">';
-			list += '		<div class="pull-left" style="color:#0e96ca;cursor:pointer">'+this.data[i].senderid+'</div>';
+			
+			//0是未读，1是已读
+			if(this.data[i].state == 0){
+				list += '		<div class="pull-left" style="color:#0e96ca;cursor:pointer"><span class="message_not_read badge">未读 </span> '+this.data[i].senderid+'</div>';
+				
+			}
+			if(this.data[i].state == 1){
+				list += '		<div class="pull-left" style="color:#0e96ca;cursor:pointer"> '+this.data[i].senderid+'</div>';
+			}
 			list += '		<div class="pull-right" style="color:#0e96ca;cursor:pointer">'+this.data[i].time+'</div>';
 			list += '	</div>';
 			list += '	<div style="height:20px;overflow:hidden;cursor:pointer">';
@@ -129,7 +148,15 @@ MessageCenter.prototype.loadPage = function(pageno){
 			
 			list += '<a class="list-group-item" style="height:70px;overflow:hidden;cursor:pointer">';
 			list += '	<div style="width:100%;height:30px">';
-			list += '		<div class="pull-left" style="color:#0e96ca;cursor:pointer">'+this.data[i].senderid+'</div>';
+			//0是未读，1是已读
+			if(this.data[i].state == 0){
+				list += '		<div class="pull-left" style="color:#0e96ca;cursor:pointer"><span class="message_not_read badge">未读 </span> '+this.data[i].senderid+'</div>';
+				
+			}
+			if(this.data[i].state == 1){
+				list += '		<div class="pull-left" style="color:#0e96ca;cursor:pointer"> '+this.data[i].senderid+'</div>';
+			}
+			
 			list += '		<div class="pull-right" style="color:#0e96ca;cursor:pointer">'+this.data[i].time+'</div>';
 			list += '	</div>'
 			list += '	<div style="height:20px;overflow:hidden;cursor:pointer">';
