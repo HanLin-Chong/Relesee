@@ -213,7 +213,7 @@
 				  </ul>
 
 	        	  <button style="margin:20px 0px;" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-	        	  <button style="margin:20px 0px;" type="button" class="btn btn-primary">全部标为已读</button>
+	        	  <button id="all_message_readed" style="margin:20px 0px;" type="button" class="btn btn-primary">全部标为已读</button>
 	        	
 	      	</div>
 	    </div>
@@ -225,6 +225,9 @@
   <script>
   //自定义class：.pageloder-trigger 所有点击需要切换页面的html元素，需要有“whichpage=""”属相
   	$(document).ready(function(){
+  		//消息中心对象
+  		var msgcenter = null;
+  	
   		//与服务器建立socket连接
   		
   		var uid = "<%=user.getUserid() %>";
@@ -242,7 +245,7 @@
 
   				data = JSON.parse(data);
   				console.log(data);
-  				var msgcenter = new MessageCenter("listview","pg",data);
+  				msgcenter = new MessageCenter("listview","pg",data);
 			  	$(".pagenumberlist").click(function(e){
 					msgcenter.pageChange(e.currentTarget.innerText);
 				});
@@ -254,9 +257,18 @@
 				});
 				$(".list-group-item").each(function(index,e){
 					console.log(index,e);
+					//每一行消息的点击事件
 					$(e).click(function(){
 						//alert(index);
 						console.log(msgcenter.data[index]);
+						$.ajax({
+							url:"message/read_meesage",
+							data:{message_list:msgcenter.data[index].messageid},
+							async:false,method:"post",
+							success:function(data){
+								alert(data);
+							}
+						});
 					});
 				});
   				iziToast.show({
@@ -293,11 +305,40 @@
 			    }
 			});
 		});
-		
+		//左下角打开消息中心图标按钮
 		$("#notifications-trigger").click(function(e){
 			
 			$("#notifications-modal").modal('show');//or hide
 		});
+		
+		$("#all_message_readed").click(function(){
+			
+			if(msgcenter != null){
+				var readed_data = "";
+				var alldata = msgcenter.data;
+				for(var i = 0; i<alldata.length; i++){
+					console.log(alldata[i]);
+					if(true){//判断若消息未读
+						readed_data += alldata[i].messageid+";";
+					}else{
+					
+					}
+				}
+
+			}else{
+			
+			}
+		/*
+			$.ajax({
+				url:"message/read_meesage",
+				data:{},
+				async:false,method:"post",
+				success:function(){
+				
+				}
+			});*/
+		});
+		
 		
 		//默认500mm=0.5秒后跳出左侧栏
 		setTimeout(function(){

@@ -34,14 +34,9 @@ public class MessageDaoImpl extends BaseDaoImpl implements MessageDao {
 			if(type==MessageDao.DO_BY_ACCEPTER){
 
 
-				sql+= "where senderid="+"'"+userid+"' and state="+"'"+MessageDao.MEESAGE_NOT_READ+"";
+				sql+= "where senderid="+"'"+userid+"' and state="+"'"+MessageDao.MEESAGE_NOT_READ+"'";
 			}else{
-				sql+= "where accepterid"+"'"+userid+"' and state="+"'"+MessageDao.MEESAGE_NOT_READ+"";
-/*
-				sql+= "where senderid="+"'"+messageid+"' and state="+"'"+MessageDao.MEESAGE_NOT_READ+"'";
-			}else{
-				sql+= "where accepterid"+"'"+messageid+"' and state="+"'"+MessageDao.MEESAGE_NOT_READ+"'";
-*/
+				sql+= "where accepterid"+"'"+userid+"' and state="+"'"+MessageDao.MEESAGE_NOT_READ+"'";
 			}
 			break;
 		//未读消息
