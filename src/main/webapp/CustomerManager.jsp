@@ -231,6 +231,7 @@
   		//与服务器建立socket连接
   		
   		var uid = "<%=user.getUserid() %>";
+  		
   		var basepath = "<%=basePath %>";
   		//console.log(basepath);
   		basepath = basepath.substring(7);
@@ -242,8 +243,10 @@
   			data:{id:uid},
   			async:false,method:"post",
   			success:function(data){
-
+				console.log(data);
   				data = JSON.parse(data);
+  				
+  				
   				console.log(data);
   				msgcenter = new MessageCenter("listview","pg",data);
 			  	$(".pagenumberlist").click(function(e){
@@ -257,7 +260,7 @@
 				});
 				$(".list-group-item").each(function(index,e){
 					console.log(index,e);
-					//每一行消息的点击事件
+					//单个已读，每一行消息的点击事件
 					$(e).click(function(){
 						//alert(index);
 						console.log(msgcenter.data[index]);
@@ -266,7 +269,16 @@
 							data:{message_list:msgcenter.data[index].messageid},
 							async:false,method:"post",
 							success:function(data){
-								alert(data);
+								console.log(data);
+								iziToast.show({
+								    title: '系统提示',
+								    message: '单条消息已读，服务器返回值在console中看',
+								    color:'blue',
+								    layout:1,
+								    onClose: function () {
+								    	
+								    }
+								});
 							}
 						});
 					});
@@ -311,32 +323,47 @@
 			$("#notifications-modal").modal('show');//or hide
 		});
 		
+		//全部已读
 		$("#all_message_readed").click(function(){
-			
+			//防止对象为空
 			if(msgcenter != null){
+				//开始将所有消息中的未读消息打包至readed_data中
 				var readed_data = "";
 				var alldata = msgcenter.data;
+				//遍历消息
 				for(var i = 0; i<alldata.length; i++){
 					console.log(alldata[i]);
-					if(true){//判断若消息未读
-						readed_data += alldata[i].messageid+";";
+					//判断若消息未读
+					if(alldata[i].state == 0 || alldata[i].state == "0"){
+						readed_data += $.trim(alldata[i].messageid)+";";
 					}else{
 					
 					}
 				}
+				//打包完毕，开始请求
+				$.ajax({
+					url:"message/read_meesage",
+					data:{message_list:readed_data},
+					async:false,method:"post",
+					success:function(data){
+						console.log(data);
+						iziToast.show({
+						    title: '系统提示',
+						    message: '所有消息已读！,服务器返回值在console中查看',
+						    color:'blue',
+						    layout:1,
+						    onClose: function () {
+						    	
+						    }
+						});
+					}
+				});
 
 			}else{
 			
 			}
-		/*
-			$.ajax({
-				url:"message/read_meesage",
-				data:{},
-				async:false,method:"post",
-				success:function(){
-				
-				}
-			});*/
+		
+			
 		});
 		
 		
