@@ -27,7 +27,7 @@ public class MessageDaoImpl extends BaseDaoImpl implements MessageDao {
 	 */
 	@Override
 	public List<SocketMessage> findMessageById(String userid, int type, int state) {
-		String sql = "select senderid,accepterid,time,text,notes,MessageType from MessageRecords ";
+		String sql = "select messageid, senderid,accepterid,time,text,notes,MessageType,state from MessageRecords ";
 		switch(state){
 		//消息已读
 		case MessageDao.MEESAGE_NOT_READ:
@@ -48,7 +48,6 @@ public class MessageDaoImpl extends BaseDaoImpl implements MessageDao {
 			break;
 		default:
 			break;
-			
 		}
 		return this.find(sql, SocketMessage.class);
 	

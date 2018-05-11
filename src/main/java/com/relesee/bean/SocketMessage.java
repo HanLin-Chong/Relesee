@@ -10,7 +10,6 @@ import java.util.Date;
 public class SocketMessage {
 	
 
-	
 	private String senderid;
 	private String accepterid;
 	private String text;

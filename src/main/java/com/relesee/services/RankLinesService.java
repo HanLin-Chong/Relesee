@@ -80,5 +80,4 @@ public class RankLinesService {
 	public RankItem findById(String ranklineid){
 		return rankItemDao.findById(ranklineid);
 	}
-
 }
