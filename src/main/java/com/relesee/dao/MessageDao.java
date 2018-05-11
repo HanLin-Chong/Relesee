@@ -30,3 +30,4 @@ public interface MessageDao {
 	public boolean updateMessageById(String id, int newState);
 	
 }
+
