@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.relesee.bean.SocketMessage;
+import com.relesee.bean.UserType;
 import com.relesee.dao.MessageDao;
 import com.relesee.services.MessageService;
 
@@ -25,14 +26,13 @@ import net.sf.json.JSONArray;
 @Controller
 @RequestMapping("/message")
 public class MessageController {
-	private final String USER_TYPE="MSID";
 	@Autowired
 	private MessageService messageService;
 	@RequestMapping("/get_message")
 	public void getMessage(HttpServletRequest req,HttpServletResponse resp) throws IOException{
 		List<SocketMessage> messageList;
 		String targetId = req.getParameter("id");
-		if(targetId.startsWith("MSID")){
+		if(targetId.startsWith(UserType.getName(2))){
 			messageList = messageService.getMessageByAccepterId(targetId, MessageDao.MESSAGE_READ);
 		}else{
 			messageList = messageService.getMessageSendererId(targetId, MessageDao.MESSAGE_READ);
