@@ -32,11 +32,9 @@ public class MessageDaoImpl extends BaseDaoImpl implements MessageDao {
 		//消息已读
 		case MessageDao.MEESAGE_NOT_READ:
 			if(type==MessageDao.DO_BY_ACCEPTER){
-
-
 				sql+= "where senderid="+"'"+userid+"' and state="+"'"+MessageDao.MEESAGE_NOT_READ+"'";
 			}else{
-				sql+= "where accepterid"+"'"+userid+"' and state="+"'"+MessageDao.MEESAGE_NOT_READ+"'";
+				sql+= "where accepterid="+"'"+userid+"' and state="+"'"+MessageDao.MEESAGE_NOT_READ+"'";
 
 			}
 			break;
@@ -44,14 +42,12 @@ public class MessageDaoImpl extends BaseDaoImpl implements MessageDao {
 		case MessageDao.MESSAGE_READ:if(type==MessageDao.DO_BY_ACCEPTER){
 			sql+= "where senderid="+"'"+userid+"' and state="+"'"+MessageDao.MESSAGE_READ+"'";
 		}else{
-			sql+= "where accepterid"+"'"+userid+"' and state="+"'"+MessageDao.MESSAGE_READ+"'";
+			sql+= "where accepterid="+"'"+userid+"' and state="+"'"+MessageDao.MESSAGE_READ+"'";
 		}
-			break;
 		default:
 			break;
 		}
 		return this.find(sql, SocketMessage.class);
-	
 	}
 
 	
@@ -101,17 +97,18 @@ public class MessageDaoImpl extends BaseDaoImpl implements MessageDao {
 	}
 
 	/**
-	 * @param id，更具messageid  操改编对应的消息阅读状态    
-	 * @para type 操作对应的类别，分别未MessageDao.DO_ACCEPTERI与MessageDao.DO_BY_SENDERID
-	 * @return true 操作成功
+	 * @param id  根据消息id修改对应message的阅读状态
+	 * @para type 
+	 * @return true 
 	 *  
 	 */
 	@Override
 	public boolean updateMessageById(String messageid , int newState) {
 		//sql
 		Object[] obj = new Object[]{
-				messageid,
-				newState
+				newState,
+				messageid
+				
 		};
 			String sql = "update MessageRecords set state = ? where messageid=?";
 			return this.updateByParam(sql, obj);

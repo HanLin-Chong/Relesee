@@ -24,7 +24,6 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public boolean login(User user) {
 		User queryRs = userDao.findById(user.getUserid());
-		System.out.println("查询结果"+queryRs);
 		if(queryRs!=null){
 			return invalidPassword(user,queryRs);
 		}else{
