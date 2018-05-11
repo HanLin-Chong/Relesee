@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.relesee.annotation.Operator;
 import com.relesee.bean.RankItem;
 import com.relesee.bean.User;
 import com.relesee.contant.Contant;
@@ -35,6 +36,8 @@ public class RankLinesController {
 	/*
 	 *  根据队列项目的订单状态查询队列，
 	 */
+	
+	@Operator(target="ranklines0", operator="ni")
 	@RequestMapping("/query_with_status")
 	public void findRankLinesWithStatuts(String status,HttpServletRequest req,HttpServletResponse resp){
 		resp.setHeader("Content-type", "text/html;charset=UTF-8");  
@@ -97,9 +100,10 @@ public class RankLinesController {
 		// 若不存即返回消息，数据库中不存在该条数据
 		RankItem item = this.rankLinesService.findById(ranklineid);
 		if(item != null){
-			//获取文件的路径
-			String filePath =Contant.FILE_BASE_RUL + item.getFilesurl();
+			//获取文件的真实路径
+			String filePath =req.getServletContext().getRealPath("uploadfiles/") + item.getFilesurl();
 			if(this.rankLinesService.deleteItem(ranklineid)){
+				System.out.println(filePath);
 				if(FileUtil.deleteFile(filePath)){
 					info = getSuccessToastMessage("删除成功");
 				}else{

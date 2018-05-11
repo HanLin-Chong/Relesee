@@ -92,11 +92,6 @@ public class RankItemDaoImpl  extends BaseDaoImpl implements RankItemDao{
 	}
 
 	
-	/*
-	 * (non-Javadoc)
-	 * 根据顶
-	 * @see dao.RankItemDao#findById(java.lang.String)
-	 */
 	@Override
 	public RankItem findById(String ranklineid) {
 		String sql= "select * from ranklines where ranklineid="+"'"+ranklineid+"'";

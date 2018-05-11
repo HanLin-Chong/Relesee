@@ -13,7 +13,6 @@ public class HandShake implements HandshakeInterceptor{
     @Override  
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,  
             Map<String, Object> attributes) throws Exception {  
-        // TODO Auto-generated method stub  
         String jspCode = ((ServletServerHttpRequest) request).getServletRequest().getParameter("jspCode");  
         // 标记用户  
         //String userId = (String) session.getAttribute("userId");  
@@ -28,7 +27,6 @@ public class HandShake implements HandshakeInterceptor{
     @Override  
     public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,  
             Exception exception) {  
-        // TODO Auto-generated method stub  
           
     }  
   

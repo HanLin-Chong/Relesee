@@ -14,7 +14,6 @@ import com.relesee.dao.impl.MessageDaoImpl;
  * @author jinfeng
  * Message的具体服务层，主要为Contrller层提供Messagede 业务流程
  */
-
 @Service
 public class MessageService {
     @Autowired
@@ -45,27 +44,14 @@ public class MessageService {
      * @param newState
      * @return
      */
-    public boolean  updateByAccepterId(String Accepterid,int newState){
-    	return this.messageDaoImpl.updateMessageById( Accepterid, MessageDao.DO_BY_ACCEPTER, newState);
-    }
-    /**
-     * 
-     * @param senderid
-     * @param newState
-     * @return
-     */
-    public boolean updateBySenderId(String senderid, int newState){
-    	return this.messageDaoImpl.updateMessageById( senderid, MessageDao.DO_BY_SENDERID, newState);
+    public int updateByMessage(String[]  idList , int state){
+    	//成功改变消息状态个数
+    	int count = 0;
+    	for(String id : idList){
+    		if(this.messageDaoImpl.updateMessageById(id, state));
+    		count++;
+    	}
+    	return count;
     }
     
-    public boolean deleteBySender(String sender){
-    	
-    	
-    	return false;
-    }
-    
-    public boolean deleteByAccepterid(String accepterid){
-    	
-    	return false;
-    }
 }
