@@ -167,9 +167,10 @@
 	        	<h4 class="modal-title" id="myModalLabel">消息中心</h4>
 	      	</div>
 	      	<div class="modal-body row">
-	      		<ul id="listview" class="list-group col-md-8" >
+	      		<ul id="listview" class="list-group" ><!-- col-md-8 -->
 			  	空
 				</ul>
+				<!-- 
 				<ul class="well col-md-4" style="width:32%;">
 					<div id="the_other" style="height:50px">
 						与XX的会话
@@ -188,6 +189,7 @@
 			      		</span>
 					</div>
 				</ul>
+				 -->
 	      	</div>
 	      	
 	      	<div class="modal-footer">
