@@ -28,6 +28,7 @@ public class MessageService {
     public List<SocketMessage> getMessageByAccepterId(String accepterid, int state){
     	return this.messageDaoImpl.findMessageById(accepterid, MessageDao.DO_BY_ACCEPTER, state);
     }
+    
     /**
      * 根据消息发送者查看消息
      * @param accepterid  消息接收者的员工编号
