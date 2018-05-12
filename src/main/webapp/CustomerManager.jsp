@@ -239,7 +239,7 @@
   		var wso = new wsOperation(basepath,uid);
   		//请求离线消息
   		$.ajax({
-  			url:"message/get_history_message",
+  			url:"message/get_message",
   			data:{id:uid},
   			async:false,method:"post",
   			success:function(data){

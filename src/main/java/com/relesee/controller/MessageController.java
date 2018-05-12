@@ -1,6 +1,7 @@
 package com.relesee.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +34,16 @@ public class MessageController {
 		List<SocketMessage> messageList;
 		String targetId = req.getParameter("id");
 		if(targetId.startsWith(UserType.getName(2))){
-			messageList = messageService.getMessageByAccepterId(targetId, MessageDao.MESSAGE_READ);
+			List<SocketMessage>  list = new ArrayList<SocketMessage>();
+			list = messageService.getMessageByAccepterId(targetId, MessageDao.MESSAGE_READ);
+			messageList = messageService.getMessageByAccepterId(targetId, MessageDao.MEESAGE_NOT_READ);
+			messageList.addAll(list);
+		
 		}else{
-			messageList = messageService.getMessageSendererId(targetId, MessageDao.MESSAGE_READ);
+			List<SocketMessage>  list = new ArrayList<SocketMessage>();
+			list = messageService.getMessageByAccepterId(targetId, MessageDao.MESSAGE_READ);
+			messageList = messageService.getMessageSendererId(targetId, MessageDao.MEESAGE_NOT_READ);
+			messageList.addAll(list);
 		}
 		resp.getWriter().write(JSONArray.fromObject(messageList).toString());
 	}
