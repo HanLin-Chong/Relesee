@@ -64,7 +64,7 @@ wsOperation.prototype.send = function(accepterid,text){
 //构造方法
 function MessageCenter(ViewContainerID,paginationID,msgJson){
 	if(msgJson.length == 0 || msgJson == null){
-		msgJson = JSON.parse('[{"accepterid":"","messageid":"","messagetype":"","notes":"","senderid":"","state":"0","text":"无消息","time":""}]');
+		msgJson = JSON.parse('[{"accepterid":"","messageid":"","messagetype":"","notes":"","senderid":"","state":"1","text":"无离线消息","time":""}]');
 	}
 	this.data = msgJson;
 	this.length = this.data.length;

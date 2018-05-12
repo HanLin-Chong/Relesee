@@ -128,8 +128,8 @@
           </div><!-- sidebar-content  -->
    
           <div class="sidebar-footer">
-              <a id="notifications-trigger" title="消息中心" ><i class="fa fa-bell"></i><span class="label label-warning notification">3</span></a>
-              <a class="pageloder-trigger" whichpage="draft.html" title="操作日志"><i class="glyphicon glyphicon-list-alt"></i><span class="label label-success notification">7</span></a>
+              <a id="notifications-trigger" title="消息中心" ><i class="fa fa-bell"></i></a>
+              <a id="message_send_and_history_message" title="发送消息"><i class="glyphicon glyphicon-list-alt"></i><span class="label label-success notification">7</span></a>
               
               <a title="退出当前账号"><i class="fa fa-power-off"></i></a>
           </div>
@@ -233,9 +233,7 @@
   		var uid = "<%=user.getUserid() %>";
   		
   		var basepath = "<%=basePath %>";
-  		//console.log(basepath);
   		basepath = basepath.substring(7);
-  		//console.log(basepath);
   		var wso = new wsOperation(basepath,uid);
   		//请求离线消息
   		$.ajax({
@@ -243,11 +241,23 @@
   			data:{id:uid},
   			async:false,method:"post",
   			success:function(data){
-				console.log(data);
   				data = JSON.parse(data);
-  				
-  				
-  				console.log(data);
+  				if(data.length > 0){
+  					$("#notifications-trigger").append('<span id="message_total" class="label label-warning notification">'+data.length+'</span>');
+  				}
+  				if(data.length != 0){
+  					iziToast.show({
+					    title: '离线消息',
+					    message: '您有离线消息未阅读,关闭此提示后将为您打开消息中心',
+					    color:'yellow',
+					    layout:1,
+					    position:'topRight',
+					    timeout:10000,
+					    onClose: function () {
+					    	$("#notifications-modal").modal('show');
+					    }
+					});
+  				}
   				msgcenter = new MessageCenter("listview","pg",data);
 			  	$(".pagenumberlist").click(function(e){
 					msgcenter.pageChange(e.currentTarget.innerText);
@@ -259,41 +269,35 @@
 					msgcenter.pageChange((msgcenter.currentPage*1+1)*1);
 				});
 				$(".list-group-item").each(function(index,e){
-					console.log(index,e);
 					//单个已读，每一行消息的点击事件
 					$(e).click(function(){
-						//alert(index);
-						console.log(msgcenter.data[index]);
 						$.ajax({
 							url:"message/read_meesage",
 							data:{message_list:msgcenter.data[index].messageid},
 							async:false,method:"post",
-							success:function(data){
-								console.log(data);
-								iziToast.show({
-								    title: '系统提示',
-								    message: '单条消息已读，服务器返回值在console中看',
-								    color:'blue',
-								    layout:1,
-								    onClose: function () {
-								    	
-								    }
-								});
+							success:function(data2){
+								/*if(data.length != 0){
+									iziToast.show({
+									    title: '系统提示',
+									    message: '单条消息已读，服务器返回值在console中看',
+									    color:'blue',
+									    layout:1,
+									    onClose: function () {
+									    	
+									    }
+									});
+								}*/
+								
+								//移除“未读”标签
+								e.getElementsByClassName("message_not_read")[0].remove();
+								
+								
 							}
-						});
+						});//end of ajax
 					});
 				});
-  				iziToast.show({
-				    title: '离线消息',
-				    message: '您有离线消息未阅读,关闭此提示后将为您打开消息中心',
-				    color:'yellow',
-				    layout:1,
-				    position:'topRight',
-				    timeout:10000,
-				    onClose: function () {
-				    	$("#notifications-modal").modal('show');
-				    }
-				});
+				
+  				
   			}
   		}); 
   		 
@@ -301,9 +305,13 @@
   		//所有pageloder-trigger类，只要添加whichpage属性就可实现加载该页面
   		$(".pageloder-trigger").click(function(e){
   			var url=e.currentTarget.getAttribute("whichpage");
-  			console.log(url);
   			$(".page-content").load(url);
   		});
+  		
+  		$("#message_send_and_history_message").click(function(){
+  			alert("此模块等待具体方案中");
+  		});
+  		
   		
   		//点初始界面上的按钮弹出toast，到时候记得删掉
 		$("#trigger").click(function(){
@@ -332,7 +340,6 @@
 				var alldata = msgcenter.data;
 				//遍历消息
 				for(var i = 0; i<alldata.length; i++){
-					console.log(alldata[i]);
 					//判断若消息未读
 					if(alldata[i].state == 0 || alldata[i].state == "0"){
 						readed_data += $.trim(alldata[i].messageid)+";";
@@ -346,19 +353,12 @@
 					data:{message_list:readed_data},
 					async:false,method:"post",
 					success:function(data){
-						console.log(data);
-						iziToast.show({
-						    title: '系统提示',
-						    message: '所有消息已读！,服务器返回值在console中查看',
-						    color:'blue',
-						    layout:1,
-						    onClose: function () {
-						    	
-						    }
-						});
+
 					}
 				});
-
+				$(".message_not_read").each(function(index,e){
+					e.remove();
+				})
 			}else{
 			
 			}
@@ -375,7 +375,6 @@
   	});
   	//onmessage回调此函数
   	function msgProcessor(data){
-  		console.log(data);
   		iziToast.show({
   				title: 'XX人',
 			    message: data,

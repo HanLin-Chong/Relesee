@@ -208,7 +208,7 @@
 				}
 				if(isClosed){
 					clearTimeout(timerTimeout);
-					console.log('closed1');
+					console.log('主动关闭');
 					toast.classList.remove(PLUGIN_NAME+'-closed');
 				}
 
@@ -220,7 +220,7 @@
 					if(Math.round(percentage) < 0 || typeof toast != 'object'){
 						clearTimeout(timerTimeout);
 						callback.apply();
-						console.log('closed2');
+						console.log('自动关闭');
 					}
 				}
 
